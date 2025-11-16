@@ -83,17 +83,20 @@ namespace Project_bpi
 
         private void MenuItem_Click(object sender, MouseButtonEventArgs e)
         {
-            // снять стиль с предыдущего
             if (currentActive != null)
             {
+                // Сброс стиля активного
                 currentActive.Style = (Style)FindResource("MenuItemStyle");
-                // возврат текста к стилю (удаляем локальный Foreground)
+
+                // Сброс текста к исходному цвету
                 ResetTextBlocksForeground(currentActive);
+
+                // Восстановление стрелки у предыдущего элемента
+                var previousArrow = currentActive.FindName("NIR_Arrow") as Image;
+                if (previousArrow != null) previousArrow.Visibility = Visibility.Visible;
             }
 
             Border b = sender as Border;
-            if (b == null) return;
-
             string tag = b.Tag as string;
 
             switch (tag)
@@ -101,25 +104,28 @@ namespace Project_bpi
                 case "main":
                     b.Style = (Style)FindResource("ActiveMainItemStyle");
                     break;
-
                 case "sub":
                     b.Style = (Style)FindResource("ActiveSubItemStyle");
                     break;
-
                 case "sub2":
                     b.Style = (Style)FindResource("ActiveSubItemLevel2Style");
                     break;
-
                 default:
                     b.Style = (Style)FindResource("ActiveMainItemStyle");
                     break;
             }
 
-            // Установим белый текст для активного пункта
+            // Меняем цвет текста всех TextBlock внутри активного элемента
             SetTextBlocksForeground(b, Brushes.White);
+
+            // Скрываем стрелку, если она есть
+            var arrow = b.FindName("NIR_Arrow") as Image;
+            if (arrow != null) arrow.Visibility = Visibility.Collapsed;
 
             currentActive = b;
         }
+
+
 
     }
 }
