@@ -24,5 +24,31 @@ namespace Project_bpi
         {
             InitializeComponent();
         }
+        private void NIR_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            NIR_Menu.Visibility = NIR_Menu.Visibility == Visibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+
+        private void Section1_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            Section1_Menu.Visibility = Section1_Menu.Visibility == Visibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+        Border currentActive = null;
+
+        private void MenuItem_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (currentActive != null)
+                currentActive.Style = (Style)FindResource("MenuItemStyle");
+
+            Border b = sender as Border;
+            b.Style = (Style)FindResource("ActiveItemStyle");
+
+            currentActive = b;
+        }
+
     }
 }
