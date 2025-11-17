@@ -37,7 +37,7 @@ namespace Project_bpi
         }
 
         Border currentActive = null;
-        //изменение
+        //изменение!!
         // Универсальный итератор по визуальному дереву для поиска TextBlock внутри Border
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
