@@ -155,11 +155,11 @@
                                             <TextBlock Text="1.1 Общая характеристика научных исследований"
                                                        Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
                                         </Border>
-                                        <Border x:Name="Item_12" MouseLeftButtonDown="MenuItem_Click"
-                                                Tag="sub2"
-                                                Style="{StaticResource MenuItemStyle}">
+                                        <Border x:Name="Item_12" MouseLeftButtonDown="Item_12_Click"
+        Tag="sub2"
+        Style="{StaticResource MenuItemStyle}">
                                             <TextBlock Text="1.2 Хоздоговорные НИР"
-                                                       Style="{StaticResource SubMenuStyle1}"/>
+               Style="{StaticResource SubMenuStyle1}"/>
                                         </Border>
                                         <Border x:Name="Item_13" MouseLeftButtonDown="MenuItem_Click"
                                                 Tag="sub2"
@@ -223,11 +223,15 @@
 
         <!-- Основной контент -->
         <Border Grid.Column="1" Background="#e8e8e8">
-            <TextBlock Text="Основная область контента"
+            <ContentControl x:Name="MainContentControl">
+                <ContentControl.Content>
+                    <TextBlock Text="Основная область контента"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Foreground="#6c757d"
                        FontSize="16"/>
+                </ContentControl.Content>
+            </ContentControl>
         </Border>
 
         <!-- Правая панель с кнопками внизу -->

@@ -13,18 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace Project_bpi
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+
         private void NIR_Header_Click(object sender, MouseButtonEventArgs e)
         {
             NIR_Menu.Visibility = NIR_Menu.Visibility == Visibility.Visible
@@ -38,10 +35,9 @@ namespace Project_bpi
                 ? Visibility.Collapsed
                 : Visibility.Visible;
         }
+
         Border currentActive = null;
 
-
-        // Универсальный итератор по визуальному дереву для поиска TextBlock внутри Border
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj == null) yield break;
@@ -58,19 +54,16 @@ namespace Project_bpi
             }
         }
 
-        // Сброс локального Foreground у всех TextBlock в Border (возврат к стилю)
         private void ResetTextBlocksForeground(Border border)
         {
             if (border == null) return;
 
             foreach (TextBlock tb in FindVisualChildren<TextBlock>(border))
             {
-                // удаляем локальное значение Foreground — тогда TextBlock снова использует своё style.Foreground
                 tb.ClearValue(TextBlock.ForegroundProperty);
             }
         }
 
-        // Установка цвета текста (например, белого) для всех TextBlock в Border
         private void SetTextBlocksForeground(Border border, Brush brush)
         {
             if (border == null) return;
@@ -85,18 +78,16 @@ namespace Project_bpi
         {
             if (currentActive != null)
             {
-                // Сброс стиля активного
                 currentActive.Style = (Style)FindResource("MenuItemStyle");
-
-                // Сброс текста к исходному цвету
                 ResetTextBlocksForeground(currentActive);
 
-                // Восстановление стрелки у предыдущего элемента
                 var previousArrow = currentActive.FindName("NIR_Arrow") as Image;
                 if (previousArrow != null) previousArrow.Visibility = Visibility.Visible;
             }
 
             Border b = sender as Border;
+            if (b == null) return;
+
             string tag = b.Tag as string;
 
             switch (tag)
@@ -115,17 +106,41 @@ namespace Project_bpi
                     break;
             }
 
-            // Меняем цвет текста всех TextBlock внутри активного элемента
             SetTextBlocksForeground(b, Brushes.White);
 
-            // Скрываем стрелку, если она есть
             var arrow = b.FindName("NIR_Arrow") as Image;
             if (arrow != null) arrow.Visibility = Visibility.Collapsed;
 
             currentActive = b;
+
+            // Показываем соответствующий контент
+            ShowContentForMenuItem(b);
         }
 
+        private void ShowContentForMenuItem(Border menuItem)
+        {
+            if (menuItem == Item_12)
+            {
+                MainContentControl.Content = new ContractResearchView();
+            }
+            else
+            {
+                // Для других пунктов меню показываем заглушку
+                MainContentControl.Content = new TextBlock
+                {
+                    Text = "Основная область контента",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = Brushes.Gray,
+                    FontSize = 16
+                };
+            }
+        }
 
-
+        // Специальный обработчик для пункта 1.2
+        private void Item_12_Click(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem_Click(sender, e);
+        }
     }
 }
