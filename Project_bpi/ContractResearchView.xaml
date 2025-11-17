@@ -46,13 +46,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <!-- Основной контент с автоматической прокруткой -->
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
                 <!-- Заголовок раздела -->
                 <TextBlock Text="1. Договорная деятельность" 
@@ -63,9 +57,8 @@
                            FontSize="12" FontWeight="Bold" Foreground="#0167a4"
                            Margin="0,0,0,20"/>
 
-                <!-- Основная таблица - теперь с автоматическим изменением размера -->
-                <Border BorderBrush="Black" BorderThickness="1" Background="White"
-                        HorizontalAlignment="Left" VerticalAlignment="Top">
+                <!-- Основная таблица -->
+                <Border BorderBrush="Black" BorderThickness="1" Background="White">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -77,57 +70,51 @@
                         <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                    <ColumnDefinition Width="40"/>
                                     <!-- № договора -->
-                                    <ColumnDefinition Width="Auto" MinWidth="250"/>
+                                    <ColumnDefinition Width="250"/>
                                     <!-- Наименование -->
-                                    <ColumnDefinition Width="Auto" MinWidth="80"/>
+                                    <ColumnDefinition Width="80"/>
                                     <!-- Стоимость НИР -->
-                                    <ColumnDefinition Width="Auto" MinWidth="100"/>
+                                    <ColumnDefinition Width="100"/>
                                     <!-- Заказчик -->
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
+                                    <ColumnDefinition Width="60"/>
                                     <!-- Акты -->
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
+                                    <ColumnDefinition Width="60"/>
                                     <!-- Оплата -->
-                                    <ColumnDefinition Width="Auto" MinWidth="200"/>
+                                    <ColumnDefinition Width="200"/>
                                     <!-- Краткая характеристика -->
                                 </Grid.ColumnDefinitions>
 
                                 <!-- № договора -->
                                 <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="№ договора" Style="{StaticResource TableHeaderStyle}" 
-                                               MinWidth="40" MaxWidth="80"/>
+                                    <TextBlock Text="№ договора" Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Наименование -->
                                 <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="Наименование (основание к ее выполнению: распоряжение ОАО «РЖД», научно-техническая программа и т.п.) и Ф.И.О. руководителя" 
-                                               Style="{StaticResource TableHeaderStyle}"
-                                               MinWidth="250" MaxWidth="400"/>
+                                               Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Стоимость НИР -->
                                 <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Стоимость НИР в 2о… г." Style="{StaticResource TableHeaderStyle}"
-                                               MinWidth="80" MaxWidth="120"/>
+                                    <TextBlock Text="Стоимость НИР в 2о… г." Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Заказчик -->
                                 <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Заказчик" Style="{StaticResource TableHeaderStyle}"
-                                               MinWidth="100" MaxWidth="150"/>
+                                    <TextBlock Text="Заказчик" Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Фактическое выполнение НИР -->
                                 <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" Grid.ColumnSpan="2">
-                                    <TextBlock Text="Фактическое выполнение НИР, тыс. руб." Style="{StaticResource TableHeaderStyle}"
-                                               MinWidth="120" MaxWidth="200"/>
+                                    <TextBlock Text="Фактическое выполнение НИР, тыс. руб." Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Краткая характеристика -->
                                 <Border Grid.Column="6">
-                                    <TextBlock Text="Краткая характеристика выполненных разделов темы" Style="{StaticResource TableHeaderStyle}"
-                                               MinWidth="200" MaxWidth="300"/>
+                                    <TextBlock Text="Краткая характеристика выполненных разделов темы" Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
                             </Grid>
                         </Border>
@@ -136,33 +123,33 @@
                         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="250"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="80"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="100"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="200"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Пустые ячейки для первых четырех колонок -->
-                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="40"/>
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="250"/>
-                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="80"/>
-                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="100"/>
+                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0"/>
 
                                 <!-- Акты -->
-                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="60">
+                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="Акты" Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Оплата -->
-                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="60">
+                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="Оплата" Style="{StaticResource TableHeaderStyle}"/>
                                 </Border>
 
                                 <!-- Пустая ячейка для характеристики -->
-                                <Border Grid.Column="6" MinWidth="200"/>
+                                <Border Grid.Column="6"/>
                             </Grid>
                         </Border>
 
@@ -170,41 +157,41 @@
                         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="250"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="80"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="100"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="60"/>
-                                    <ColumnDefinition Width="Auto" MinWidth="200"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Пример строки данных -->
-                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="40">
+                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="1" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="250">
+                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="2" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="80">
+                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="3" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="100">
+                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="4" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="60">
+                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="5" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0" MinWidth="60">
+                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
                                     <TextBlock Text="6" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
 
-                                <Border Grid.Column="6" MinWidth="200">
+                                <Border Grid.Column="6">
                                     <TextBlock Text="7" Style="{StaticResource TableCellStyle}"/>
                                 </Border>
                             </Grid>
@@ -222,9 +209,10 @@
         </ScrollViewer>
 
         <!-- Кнопка Сохранить в правом нижнем углу -->
-        <Button Grid.Row="1" Content="Сохранить" 
+        <Button Content="Сохранить" 
                 Style="{StaticResource SaveButtonStyle}"
                 HorizontalAlignment="Right"
-                Margin="0,10,20,10"/>
+                VerticalAlignment="Bottom"
+                Margin="0,0,20,20"/>
     </Grid>
 </UserControl>
