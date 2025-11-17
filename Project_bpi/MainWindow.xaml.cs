@@ -142,5 +142,6 @@ namespace Project_bpi
         {
             MainContentFrame.Navigate(new ArchivePage());
         }
+        //изменение3!!
     }
 }
