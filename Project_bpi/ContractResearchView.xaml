@@ -213,7 +213,7 @@
                 Style="{StaticResource SaveButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Background = "orange"
+                Background = "yellow"
                 Margin="0,0,20,20" Click="Button_Click"/>
     </Grid>
 </UserControl>
