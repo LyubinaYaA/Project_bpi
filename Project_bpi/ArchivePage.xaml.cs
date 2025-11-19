@@ -18,7 +18,7 @@ namespace Project_bpi
     /// <summary>
     /// Логика взаимодействия для ArchivePage.xaml
     /// </summary>
-    public partial class ArchivePage : Page
+    public partial class ArchivePage : UserControl
     {
         public ArchivePage()
         {
