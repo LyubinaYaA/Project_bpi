@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Project_bpi
 {
-    /// <summary>
-    /// Логика взаимодействия для ArchivePage.xaml
-    /// </summary>
+  //архив
     public partial class ArchivePage : UserControl
     {
         public ArchivePage()
