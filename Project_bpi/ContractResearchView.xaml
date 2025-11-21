@@ -222,9 +222,11 @@
         </ScrollViewer>
 
         <!-- Кнопка Сохранить в правом нижнем углу -->
-        <Button Grid.Row="1" Content="Сохранить" 
-                Style="{StaticResource SaveButtonStyle}"
-                HorizontalAlignment="Right"
-                Margin="0,10,20,10"/>
+        <Button Content="Сохранить" 
+        Style="{StaticResource SaveButtonStyle}"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Background = "Green"
+        Margin="0,0,20,20"/>
     </Grid>
 </UserControl>
