@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_bpi"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="900">
 
@@ -236,9 +237,9 @@
 
         <!-- Правая панель с кнопками внизу -->
         <Border Grid.Column="2"
-                Background="#f1f3f5"
-                BorderBrush="#d6e2ea"
-                BorderThickness="1,0,0,0">
+        Background="#f1f3f5"
+        BorderBrush="#d6e2ea"
+        BorderThickness="1,0,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -247,24 +248,176 @@
 
                 <!-- Блок с периодом - остается наверху -->
                 <Border Background="White"
-                        CornerRadius="10"
-                        Padding="10"
-                        Margin="10"
-                        BorderBrush="#d6e2ea"
-                        BorderThickness="1"
-                        VerticalAlignment="Top">
+        CornerRadius="10"
+        Padding="10"
+        Margin="10"
+        BorderBrush="#d6e2ea"
+        BorderThickness="1"
+        VerticalAlignment="Top">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="Период" FontWeight="Bold" Foreground="#0167a4"/>
-                        <TextBlock Text="01.01 - 31.12" Foreground="#6c757d" FontSize="12"/>
-                        <TextBlock Text="25" FontSize="24" FontWeight="Bold" Foreground="#0167a4"/>
-                        <TextBlock Text="Год" Foreground="#6c757d"/>
+
+                        <!-- Кликабельная область для выбора периода -->
+                        <Border x:Name="PeriodSelector" 
+                Background="Transparent" 
+                Padding="5" 
+                Cursor="Hand"
+                MouseLeftButtonDown="PeriodSelector_MouseLeftButtonDown">
+                            <StackPanel>
+                                <TextBlock x:Name="DateRangeText" 
+                           Text="01.01 - 31.12" 
+                           Foreground="#6c757d" 
+                           FontSize="12"
+                           HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="YearText" 
+                           Text="2025" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="#0167a4"
+                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="Год" 
+                           Foreground="#6c757d"
+                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </Border>
 
+                <!-- Popup с красивым календарем -->
+                <Popup x:Name="CalendarPopup" 
+               Placement="Bottom" 
+               PlacementTarget="{Binding ElementName=PeriodSelector}"
+               StaysOpen="False"
+               AllowsTransparency="True"
+               PopupAnimation="Slide">
+                    <Border Background="White" 
+                    BorderBrush="#d6e2ea" 
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,8,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" Opacity="0.1" ShadowDepth="3" Color="Black"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="Выберите период" 
+                               FontWeight="Bold" 
+                               Foreground="#0167a4"
+                               FontSize="14"
+                               Margin="0,0,0,15"
+                               HorizontalAlignment="Center"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <!-- Календарь для начала периода -->
+                                <Border Background="#f8f9fa"
+                                CornerRadius="8"
+                                Padding="12"
+                                Margin="0,0,15,0"
+                                BorderBrush="#e9ecef"
+                                BorderThickness="1">
+                                    <StackPanel>
+                                        <TextBlock Text="Начальная дата" 
+                                           Foreground="#495057" 
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
+                                        <DatePicker x:Name="StartDatePicker" 
+                                            SelectedDate="{x:Static sys:DateTime.Today}"
+                                            Width="140"
+                                            FontSize="12"
+                                            BorderBrush="#ced4da"
+                                            BorderThickness="1"
+                                            Background="White"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Стрелка между календарями -->
+                                <TextBlock Text="→" 
+                                   Foreground="#0167a4" 
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,15,0"/>
+
+                                <!-- Календарь для конца периода -->
+                                <Border Background="#f8f9fa"
+                                CornerRadius="8"
+                                Padding="12"
+                                BorderBrush="#e9ecef"
+                                BorderThickness="1">
+                                    <StackPanel>
+                                        <TextBlock Text="Конечная дата" 
+                                           Foreground="#495057" 
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,8"/>
+                                        <DatePicker x:Name="EndDatePicker" 
+                                            SelectedDate="{x:Static sys:DateTime.Today}"
+                                            Width="140"
+                                            FontSize="12"
+                                            BorderBrush="#ced4da"
+                                            BorderThickness="1"
+                                            Background="White"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Подсказка -->
+                            <TextBlock Text="Выберите начальную и конечную даты периода"
+                               Foreground="#6c757d" 
+                               FontSize="11"
+                               FontStyle="Italic"
+                               HorizontalAlignment="Center"
+                               Margin="0,12,0,0"/>
+
+                            <!-- Кнопки управления -->
+                            <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,15,0,0">
+                                <Button Content="Применить период" 
+                                Click="ApplyDateRange_Click"
+                                Background="#0167a4"
+                                Foreground="White"
+                                Padding="15,8"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                BorderThickness="0"
+                                Margin="0,0,8,0">
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.2" ShadowDepth="2"/>
+                                    </Button.Effect>
+                                </Button>
+                                <Button Content="Отмена" 
+                                Click="CancelDateRange_Click"
+                                Background="White"
+                                Foreground="#6c757d"
+                                BorderBrush="#ced4da"
+                                BorderThickness="1"
+                                Padding="15,8"
+                                FontSize="12">
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.1" ShadowDepth="1"/>
+                                    </Button.Effect>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
                 <!-- Кнопки - перемещены вниз -->
                 <StackPanel Grid.Row="1" Margin="10">
-                    <Button Content="История изменений" Margin="0,0,0,5" Height="30"/>
-                    <Button Content="Сформировать итоговый отчет" Background="#0167a4" Foreground="White" Height="35"/>
+                    <Button Content="История изменений" 
+                    Margin="0,0,0,5" 
+                    Height="30"
+                    Background="White"
+                    Foreground="#0167a4"
+                    BorderBrush="#d6e2ea"/>
+                    <Button Content="Сформировать итоговый отчет" 
+                    Background="#0167a4" 
+                    Foreground="White" 
+                    Height="35"
+                    FontWeight="SemiBold"
+                    BorderThickness="0"/>
                 </StackPanel>
             </Grid>
         </Border>
