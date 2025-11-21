@@ -123,6 +123,10 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new ContractResearchView();
             }
+            else if (menuItem == Item_Archive) // Добавьте эту строку
+            {
+                MainContentControl.Content = new ArchivePage();
+            }
             else
             {
                 // Для других пунктов меню показываем заглушку
@@ -139,6 +143,11 @@ namespace Project_bpi
 
         // Специальный обработчик для пункта 1.2
         private void Item_12_Click(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem_Click(sender, e);
+        }
+
+        private void Item_Archive_Click(object sender, MouseButtonEventArgs e)
         {
             MenuItem_Click(sender, e);
         }

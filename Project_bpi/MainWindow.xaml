@@ -205,7 +205,7 @@
                         <Border x:Name="Item_Study" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
                             <TextBlock Text="Учебный отчет" Style="{StaticResource MenuHeaderStyle}"/>
                         </Border>
-                        <Border x:Name="Item_Archive" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
+                        <Border x:Name="Item_Archive" MouseLeftButtonDown="Item_Archive_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
                             <TextBlock Text="Архив" Style="{StaticResource MenuHeaderStyle}"/>
                         </Border>
                         <Border x:Name="Item_Templates" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
