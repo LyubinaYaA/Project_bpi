@@ -210,10 +210,10 @@
 
         <!-- Кнопка Сохранить в правом нижнем углу -->
         <Button Content="Сохранить" 
-                Style="{StaticResource SaveButtonStyle}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Background = "yellow"
-                Margin="0,0,20,20" Click="Button_Click"/>
+        Style="{StaticResource SaveButtonStyle}"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Background = "Green"
+        Margin="0,0,20,20"/>
     </Grid>
 </UserControl>

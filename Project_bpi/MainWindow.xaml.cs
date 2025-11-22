@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace Project_bpi
 {
@@ -20,8 +21,159 @@ namespace Project_bpi
         public MainWindow()
         {
             InitializeComponent();
+            InitializeDateRange();
         }
 
+        private void InitializeDateRange()
+        {
+            // Устанавливаем начальный период - текущий год
+            var today = DateTime.Today;
+            var startDate = new DateTime(today.Year, 1, 1);
+            var endDate = new DateTime(today.Year, 12, 31);
+
+            UpdateDateDisplay(startDate, endDate);
+
+            // Устанавливаем даты в календари
+            StartDatePicker.SelectedDate = startDate;
+            EndDatePicker.SelectedDate = endDate;
+        }
+
+        private void PeriodSelector_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenCalendarPopup();
+        }
+
+        private void OpenCalendarPopup()
+        {
+            // Устанавливаем текущие даты из отображаемого периода
+            var currentText = DateRangeText.Text;
+            var yearText = YearText.Text;
+
+            if (!string.IsNullOrEmpty(currentText) && currentText.Contains(" - "))
+            {
+                var parts = currentText.Split(new[] { " - " }, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length == 2)
+                {
+                    // Если годы разные (формат "2024-2025")
+                    if (yearText.Contains("-"))
+                    {
+                        var yearParts = yearText.Split('-');
+                        if (yearParts.Length == 2 && int.TryParse(yearParts[0], out int startYear))
+                        {
+                            if (DateTime.TryParseExact(parts[0].Trim() + "." + startYear, "dd.MM.yyyy",
+                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
+                            {
+                                StartDatePicker.SelectedDate = startDate;
+                            }
+                        }
+                        if (yearParts.Length == 2 && int.TryParse(yearParts[1], out int endYear))
+                        {
+                            if (DateTime.TryParseExact(parts[1].Trim() + "." + endYear, "dd.MM.yyyy",
+                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
+                            {
+                                EndDatePicker.SelectedDate = endDate;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Если год один
+                        if (int.TryParse(yearText, out int currentYear))
+                        {
+                            if (DateTime.TryParseExact(parts[0].Trim() + "." + currentYear, "dd.MM.yyyy",
+                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
+                            {
+                                StartDatePicker.SelectedDate = startDate;
+                            }
+
+                            if (DateTime.TryParseExact(parts[1].Trim() + "." + currentYear, "dd.MM.yyyy",
+                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
+                            {
+                                EndDatePicker.SelectedDate = endDate;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Открываем popup
+            CalendarPopup.IsOpen = true;
+
+            // Фокусируем первый календарь и открываем его dropdown
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                StartDatePicker.Focus();
+                StartDatePicker.IsDropDownOpen = true;
+            }), System.Windows.Threading.DispatcherPriority.Render);
+        }
+
+        private void ApplyDateRange_Click(object sender, RoutedEventArgs e)
+        {
+            if (StartDatePicker.SelectedDate.HasValue && EndDatePicker.SelectedDate.HasValue)
+            {
+                var startDate = StartDatePicker.SelectedDate.Value;
+                var endDate = EndDatePicker.SelectedDate.Value;
+
+                // Проверяем, чтобы начальная дата была раньше конечной
+                if (startDate > endDate)
+                {
+                    MessageBox.Show("Начальная дата не может быть позже конечной даты", "Ошибка",
+                                  MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                UpdateDateDisplay(startDate, endDate);
+                CalendarPopup.IsOpen = false;
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите обе даты", "Внимание",
+                              MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void CancelDateRange_Click(object sender, RoutedEventArgs e)
+        {
+            CalendarPopup.IsOpen = false;
+        }
+
+        private void UpdateDateDisplay(DateTime startDate, DateTime endDate)
+        {
+            // Обновляем отображение периода
+            DateRangeText.Text = $"{startDate:dd.MM} - {endDate:dd.MM}";
+
+            // Определяем отображение года
+            if (startDate.Year == endDate.Year)
+            {
+                // Если годы одинаковые - показываем один год
+                YearText.Text = startDate.Year.ToString();
+            }
+            else
+            {
+                // Если годы разные - показываем оба года через дефис
+                YearText.Text = $"{startDate.Year}-{endDate.Year}";
+            }
+
+            OnDateRangeChanged(startDate, endDate);
+        }
+
+        private void OnDateRangeChanged(DateTime startDate, DateTime endDate)
+        {
+            // Здесь можно добавить логику обновления данных при изменении периода
+            Console.WriteLine($"Период изменен: {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}");
+
+            // Обновление заголовка окна с информацией о периоде
+            if (startDate.Year == endDate.Year)
+            {
+                this.Title = $"Project BPI - Период: {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
+            }
+            else
+            {
+                this.Title = $"Project BPI - Период: {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy} ({startDate.Year}-{endDate.Year})";
+            }
+        }
+
+        // Остальной существующий код остается без изменений
         private void NIR_Header_Click(object sender, MouseButtonEventArgs e)
         {
             NIR_Menu.Visibility = NIR_Menu.Visibility == Visibility.Visible
@@ -113,7 +265,6 @@ namespace Project_bpi
 
             currentActive = b;
 
-            // Показываем соответствующий контент
             ShowContentForMenuItem(b);
         }
 
@@ -123,9 +274,12 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new ContractResearchView();
             }
+            else if (menuItem == Item_Archive)
+            {
+                MainContentControl.Content = new ArchivePage();
+            }
             else
             {
-                // Для других пунктов меню показываем заглушку
                 MainContentControl.Content = new TextBlock
                 {
                     Text = "Основная область контента",
@@ -137,8 +291,12 @@ namespace Project_bpi
             }
         }
 
-        // Специальный обработчик для пункта 1.2
         private void Item_12_Click(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem_Click(sender, e);
+        }
+
+        private void Item_Archive_Click(object sender, MouseButtonEventArgs e)
         {
             MenuItem_Click(sender, e);
         }
