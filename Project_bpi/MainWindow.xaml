@@ -83,6 +83,14 @@
             <Setter Property="BorderBrush" Value="#004777"/>
             <Setter Property="BorderThickness" Value="4,0,0,0"/>
         </Style>
+        <Style x:Key="SearchBoxBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="#f8f9fa"/>
+            <Setter Property="BorderBrush" Value="#c4c4c4"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Margin" Value="5,0,5,5"/>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -92,134 +100,164 @@
             <ColumnDefinition Width="180"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Левая навигационная панель (без изменений) -->
+        <!-- Левая навигационная панель -->
         <Border Grid.Column="0"
                 Background="#f8f9fa"
                 BorderBrush="#d8e0e5"
                 BorderThickness="0,0,1,0">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <!-- Логотип -->
-                    <StackPanel Margin="10" HorizontalAlignment="Center">
-                        <Image Source="/images/logo.jpg"
-                               Width="180"
-                               Height="90"
-                               Stretch="Fill"/>
-                    </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Rectangle Height="1" Fill="#d6e2ea" Margin="10,0,10,10"/>
-
-                    <!-- Меню навигации -->
+                <!-- Основное содержимое меню -->
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <!-- Поиск -->
-                        <Border Style="{StaticResource MenuItemStyle}">
-                            <TextBlock Text="Поиск" Style="{StaticResource MenuHeaderStyle}"/>
-                        </Border>
-
-                        <!-- Отчет по НИР -->
-                        <StackPanel>
-                            <Border x:Name="NIR_Header"
-                                    Tag="main"
-                                    MouseLeftButtonDown="NIR_Header_Click"
-                                    Style="{StaticResource MenuItemStyle}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Отчет по НИР" Style="{StaticResource MenuHeaderStyle}"/>
-                                    <Image x:Name="NIR_Arrow" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
-                                </StackPanel>
-                            </Border>
-
-                            <StackPanel x:Name="NIR_Menu" Visibility="Collapsed">
-                                <!-- Титульный лист -->
-                                <Border x:Name="Item_Title"
-                                        Tag="sub"
-                                        MouseLeftButtonDown="MenuItem_Click"
-                                        Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Титульный лист" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-
-                                <!-- Раздел 1 -->
-                                <StackPanel>
-                                    <Border x:Name="Section1_Header"
-                                            Tag="sub"
-                                            MouseLeftButtonDown="Section1_Header_Click"
-                                            Style="{StaticResource MenuItemStyle}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Раздел 1" Style="{StaticResource SubMenuStyle}"/>
-                                            <Image x:Name="NIR_Arrow1" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <StackPanel x:Name="Section1_Menu" Visibility="Collapsed">
-                                        <Border x:Name="Item_11" MouseLeftButtonDown="MenuItem_Click"
-                                                Tag="sub2"
-                                                Style="{StaticResource MenuItemStyle}">
-                                            <TextBlock Text="1.1 Общая характеристика научных исследований"
-                                                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
-                                        </Border>
-                                        <Border x:Name="Item_12" MouseLeftButtonDown="Item_12_Click"
-        Tag="sub2"
-        Style="{StaticResource MenuItemStyle}">
-                                            <TextBlock Text="1.2 Хоздоговорные НИР"
-               Style="{StaticResource SubMenuStyle1}"/>
-                                        </Border>
-                                        <Border x:Name="Item_13" MouseLeftButtonDown="MenuItem_Click"
-                                                Tag="sub2"
-                                                Style="{StaticResource MenuItemStyle}">
-                                            <TextBlock Text="1.3 Темы госбюджетных НИ"
-                                                       Style="{StaticResource SubMenuStyle1}"/>
-                                        </Border>
-                                        <Border x:Name="Item_14" MouseLeftButtonDown="MenuItem_Click"
-                                                Tag="sub2"
-                                                Style="{StaticResource MenuItemStyle}">
-                                            <TextBlock Text="1.4 Реализация результатов НИОКР"
-                                                       Style="{StaticResource SubMenuStyle1}"/>
-                                        </Border>
-                                        <Border x:Name="Item_15" MouseLeftButtonDown="MenuItem_Click"
-                                                Tag="sub2"
-                                                Style="{StaticResource MenuItemStyle}">
-                                            <TextBlock Text="1.5 Международные творческие связи и содружество с производством"
-                                                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
-                                        </Border>
-                                    </StackPanel>
-                                </StackPanel>
-
-                                <!-- Разделы 2-6 -->
-                                <Border x:Name="Section2_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Раздел 2" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-                                <Border x:Name="Section3_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Раздел 3" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-                                <Border x:Name="Section4_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Раздел 4" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-                                <Border x:Name="Section5_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Раздел 5" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-                                <Border x:Name="Section6_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                    <TextBlock Text="Раздел 6" Style="{StaticResource SubMenuStyle}"/>
-                                </Border>
-                            </StackPanel>
+                        <!-- Логотип -->
+                        <StackPanel Margin="10" HorizontalAlignment="Center">
+                            <Image Source="/images/logo.jpg"
+                                   Width="180"
+                                   Height="90"
+                                   Stretch="Fill"/>
                         </StackPanel>
 
-                        <!-- Остальные пункты меню -->
-                        <Border x:Name="Item_Study" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
-                            <TextBlock Text="Учебный отчет" Style="{StaticResource MenuHeaderStyle}"/>
-                        </Border>
-                        <Border x:Name="Item_Archive" MouseLeftButtonDown="Item_Archive_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
-                            <TextBlock Text="Архив" Style="{StaticResource MenuHeaderStyle}"/>
-                        </Border>
-                        <Border x:Name="Item_Templates" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
-                            <TextBlock Text="Шаблоны" Style="{StaticResource MenuHeaderStyle}"/>
-                        </Border>
-                    </StackPanel>
+                        <Rectangle Height="1" Fill="#d6e2ea" Margin="10,0,10,10"/>
 
-                    <Rectangle Height="1" Fill="#d6e2ea" Margin="10,20,10,10"/>
+                        <!-- Меню навигации -->
+                        <StackPanel>
+                            <!-- Поиск -->
+                            <Border Style="{StaticResource SearchBoxBorderStyle}">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Image Source="/images/search.jpg" Width="16" Height="16" Margin="5,0"/>
+                                        <TextBox x:Name="SearchBox"
+                     Width="200"
+                     Margin="5,0"
+                     Padding="5,2"
+                     Background="#f8f9fa"
+                     BorderThickness="0"
+                     Foreground="#495057"
+                     FontSize="12"
+                     TextChanged="SearchBox_TextChanged"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="SearchPlaceholder"
+                   Text="Поиск"
+                   Foreground="#8a8a8a"
+                   Margin="30,2,0,0"
+                   VerticalAlignment="Center"
+                   IsHitTestVisible="False"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Отчет по НИР -->
+                            <StackPanel>
+                                <Border x:Name="NIR_Header"
+                                        Tag="main"
+                                        MouseLeftButtonDown="NIR_Header_Click"
+                                        Style="{StaticResource MenuItemStyle}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Отчет по НИР" Style="{StaticResource MenuHeaderStyle}"/>
+                                        <Image x:Name="NIR_Arrow" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <StackPanel x:Name="NIR_Menu" Visibility="Collapsed">
+                                    <!-- Титульный лист -->
+                                    <Border x:Name="Item_Title"
+                                            Tag="sub"
+                                            MouseLeftButtonDown="MenuItem_Click"
+                                            Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Титульный лист" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+
+                                    <!-- Раздел 1 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section1_Header"
+                                                Tag="sub"
+                                                MouseLeftButtonDown="Section1_Header_Click"
+                                                Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 1" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="NIR_Arrow1" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section1_Menu" Visibility="Collapsed">
+                                            <Border x:Name="Item_11" MouseLeftButtonDown="MenuItem_Click"
+                                                    Tag="sub2"
+                                                    Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="1.1 Общая характеристика научных исследований"
+                                                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_12" MouseLeftButtonDown="Item_12_Click"
+        Tag="sub2"
+        Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="1.2 Хоздоговорные НИР"
+               Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_13" MouseLeftButtonDown="MenuItem_Click"
+                                                    Tag="sub2"
+                                                    Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="1.3 Темы госбюджетных НИ"
+                                                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_14" MouseLeftButtonDown="MenuItem_Click"
+                                                    Tag="sub2"
+                                                    Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="1.4 Реализация результатов НИОКР"
+                                                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_15" MouseLeftButtonDown="MenuItem_Click"
+                                                    Tag="sub2"
+                                                    Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="1.5 Международные творческие связи и содружество с производством"
+                                                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- Разделы 2-6 -->
+                                    <Border x:Name="Section2_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 2" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section3_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 3" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section4_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 4" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section5_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 5" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section6_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 6" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Остальные пункты меню -->
+                            <Border x:Name="Item_Study" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
+                                <TextBlock Text="Учебный отчет" Style="{StaticResource MenuHeaderStyle}"/>
+                            </Border>
+                            <Border x:Name="Item_Archive" MouseLeftButtonDown="Item_Archive_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
+                                <TextBlock Text="Архив" Style="{StaticResource MenuHeaderStyle}"/>
+                            </Border>
+                            <Border x:Name="Item_Templates" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
+                                <TextBlock Text="Шаблоны" Style="{StaticResource MenuHeaderStyle}"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Справка - в самом низу -->
+                <StackPanel Grid.Row="1" Margin="0,10,0,10">
+                    <Rectangle Height="1" Fill="#d6e2ea" Margin="10,0,10,10"/>
                     <Border Style="{StaticResource MenuItemStyle}">
                         <TextBlock Text="Справка" Style="{StaticResource MenuHeaderStyle}"/>
                     </Border>
                 </StackPanel>
-            </ScrollViewer>
+            </Grid>
         </Border>
 
         <!-- Основной контент -->
@@ -406,19 +444,56 @@
 
                 <!-- Кнопки - перемещены вниз -->
                 <StackPanel Grid.Row="1" Margin="10">
-                    <Button Content="История изменений" 
-                    Margin="0,0,0,5" 
-                    Height="30"
-                    Background="White"
-                    Foreground="#0167a4"
-                    BorderBrush="#d6e2ea"/>
-                    <Button Content="Сформировать итоговый отчет" 
-                    Background="#0167a4" 
-                    Foreground="White" 
-                    Height="35"
-                    FontWeight="SemiBold"
-                    BorderThickness="0"/>
+                    <!-- Кнопка "История изменений" -->
+                    <Button Height="40"
+            Background="White"
+            Foreground="#0167a4"
+            BorderBrush="#d6e2ea"
+            BorderThickness="1"
+            FontWeight="SemiBold"
+            Padding="10,2">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15"
+                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <TextBlock Text="История&#x0a;изменений" 
+                   TextAlignment="Center" 
+                   TextWrapping="Wrap"/>
+                    </Button>
+
+                    <!-- Кнопка "Сформировать итоговый отчет" -->
+                    <Button Height="45"
+            Background="#0167a4" 
+            Foreground="White" 
+            FontWeight="SemiBold"
+            BorderThickness="0"
+            Padding="10,2"
+            Margin="0,5,0,0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="15"
+                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <TextBlock Text="Сформировать&#x0a;итоговый отчет" 
+                   TextAlignment="Center" 
+                   TextWrapping="Wrap"/>
+                    </Button>
                 </StackPanel>
+
+
             </Grid>
         </Border>
     </Grid>

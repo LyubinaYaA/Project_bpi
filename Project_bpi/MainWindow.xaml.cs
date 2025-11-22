@@ -18,12 +18,31 @@ namespace Project_bpi
 {
     public partial class MainWindow : Window
     {
+        private Dictionary<Border, Border> parents = new Dictionary<Border, Border>();
         public MainWindow()
         {
             InitializeComponent();
             InitializeDateRange();
+            InitializeMenuHierarchy();
         }
+        private void InitializeMenuHierarchy()
+        {
+            // 1-й уровень → корневой заголовок НИР
+            parents[Section1_Header] = NIR_Header;
+            parents[Item_Title] = NIR_Header;
+            parents[Section2_Header] = NIR_Header;
+            parents[Section3_Header] = NIR_Header;
+            parents[Section4_Header] = NIR_Header;
+            parents[Section5_Header] = NIR_Header;
+            parents[Section6_Header] = NIR_Header;
 
+            // 2-й уровень → Раздел 1
+            parents[Item_11] = Section1_Header;
+            parents[Item_12] = Section1_Header;
+            parents[Item_13] = Section1_Header;
+            parents[Item_14] = Section1_Header;
+            parents[Item_15] = Section1_Header;
+        }
         private void InitializeDateRange()
         {
             // Устанавливаем начальный период - текущий год
@@ -179,6 +198,7 @@ namespace Project_bpi
             NIR_Menu.Visibility = NIR_Menu.Visibility == Visibility.Visible
                 ? Visibility.Collapsed
                 : Visibility.Visible;
+            MenuItem_Click(sender, e);
         }
 
         private void Section1_Header_Click(object sender, MouseButtonEventArgs e)
@@ -186,6 +206,7 @@ namespace Project_bpi
             Section1_Menu.Visibility = Section1_Menu.Visibility == Visibility.Visible
                 ? Visibility.Collapsed
                 : Visibility.Visible;
+            MenuItem_Click(sender, e);
         }
 
         Border currentActive = null;
@@ -228,18 +249,36 @@ namespace Project_bpi
 
         private void MenuItem_Click(object sender, MouseButtonEventArgs e)
         {
-            if (currentActive != null)
-            {
-                currentActive.Style = (Style)FindResource("MenuItemStyle");
-                ResetTextBlocksForeground(currentActive);
 
-                var previousArrow = currentActive.FindName("NIR_Arrow") as Image;
-                if (previousArrow != null) previousArrow.Visibility = Visibility.Visible;
-            }
+            ResetAllStyles();
 
             Border b = sender as Border;
             if (b == null) return;
 
+            HighlightChain(b);
+
+            currentActive = b;
+
+            ShowContentForMenuItem(b);
+            UpdateArrows();
+
+
+        }
+        private void ResetAllStyles()
+        {
+            foreach (var border in FindVisualChildren<Border>(this))
+            {
+                string tag = border.Tag as string;
+
+                if (tag == "main" || tag == "sub" || tag == "sub2")
+                {
+                    border.Style = (Style)FindResource("MenuItemStyle");
+                    ResetTextBlocksForeground(border);
+                }
+            }
+        }
+        private void ApplyActiveStyle(Border b)
+        {
             string tag = b.Tag as string;
 
             switch (tag)
@@ -253,19 +292,9 @@ namespace Project_bpi
                 case "sub2":
                     b.Style = (Style)FindResource("ActiveSubItemLevel2Style");
                     break;
-                default:
-                    b.Style = (Style)FindResource("ActiveMainItemStyle");
-                    break;
             }
 
             SetTextBlocksForeground(b, Brushes.White);
-
-            var arrow = b.FindName("NIR_Arrow") as Image;
-            if (arrow != null) arrow.Visibility = Visibility.Collapsed;
-
-            currentActive = b;
-
-            ShowContentForMenuItem(b);
         }
 
         private void ShowContentForMenuItem(Border menuItem)
@@ -277,6 +306,10 @@ namespace Project_bpi
             else if (menuItem == Item_Archive)
             {
                 MainContentControl.Content = new ArchivePage();
+            }
+            else if (menuItem == Item_Templates)
+            {
+                MainContentControl.Content = new TemplatesPage(); 
             }
             else
             {
@@ -300,5 +333,107 @@ namespace Project_bpi
         {
             MenuItem_Click(sender, e);
         }
+
+        private void HighlightChain(Border start)
+        {
+            Border current = start;
+
+            while (current != null)
+            {
+                ApplyActiveStyle(current);
+
+                if (parents.ContainsKey(current))
+                    current = parents[current];
+                else
+                    break;
+            }
+        }
+        private bool IsActive(Border b)
+        {
+            return b.Style == (Style)FindResource("ActiveMainItemStyle")
+                || b.Style == (Style)FindResource("ActiveSubItemStyle")
+                || b.Style == (Style)FindResource("ActiveSubItemLevel2Style");
+        }
+        private void UpdateArrows()
+        {
+            // Стрелка у "Отчет по НИР"
+            if (IsActive(NIR_Header))
+                NIR_Arrow.Visibility = Visibility.Collapsed;
+            else
+                NIR_Arrow.Visibility = Visibility.Visible;
+
+            // Стрелка у "Раздел 1"
+            if (IsActive(Section1_Header))
+                NIR_Arrow1.Visibility = Visibility.Collapsed;
+            else
+                NIR_Arrow1.Visibility = Visibility.Visible;
+        }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Placeholder
+            SearchPlaceholder.Visibility = string.IsNullOrEmpty(SearchBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+
+            string query = SearchBox.Text.ToLower();
+
+            // Фильтруем меню
+            FilterMenuPanel(NIR_Menu, query);
+
+            // Фильтруем остальные пункты
+            FilterMenuItem(Item_Study, query);
+            FilterMenuItem(Item_Archive, query);
+            FilterMenuItem(Item_Templates, query);
+        }
+
+        private void FilterMenuPanel(StackPanel panel, string query)
+        {
+            foreach (var child in panel.Children)
+            {
+                if (child is Border border)
+                {
+                    FilterMenuItem(border, query);
+
+                    // Если есть подменю, фильтруем рекурсивно
+                    StackPanel subPanel = null;
+                    if (border.Name == "Section1_Header") subPanel = Section1_Menu;
+                    else if (border.Name == "NIR_Header") subPanel = NIR_Menu;
+
+                    if (subPanel != null)
+                    {
+                        FilterMenuPanel(subPanel, query);
+
+                        // Показываем родителя, если есть видимые дети или совпадение
+                        bool hasVisibleChild = subPanel.Children.Cast<UIElement>().Any(c => c.Visibility == Visibility.Visible);
+                        border.Visibility = border.Visibility == Visibility.Visible || hasVisibleChild
+                            ? Visibility.Visible
+                            : Visibility.Collapsed;
+                    }
+                }
+                else if (child is StackPanel sp)
+                {
+                    FilterMenuPanel(sp, query);
+                }
+            }
+        }
+
+        private void FilterMenuItem(Border border, string query)
+        {
+            TextBlock tb = null;
+            if (border.Child is StackPanel sp)
+                tb = sp.Children.OfType<TextBlock>().FirstOrDefault();
+            else
+                tb = border.Child as TextBlock;
+
+            if (tb != null)
+            {
+                bool match = string.IsNullOrEmpty(query) || tb.Text.ToLower().Contains(query);
+                border.Visibility = match ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+
+
+
+
+
     }
 }
