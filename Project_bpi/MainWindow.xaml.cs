@@ -19,6 +19,7 @@ namespace Project_bpi
     public partial class MainWindow : Window
     {
         private Dictionary<Border, Border> parents = new Dictionary<Border, Border>();
+        private DateTime _currentCalendarDate = DateTime.Today;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +44,15 @@ namespace Project_bpi
             parents[Item_14] = Section1_Header;
             parents[Item_15] = Section1_Header;
         }
+
+        public class CalendarDay
+        {
+            public string Day { get; set; }
+            public string TextColor { get; set; }
+            public string FontWeight { get; set; }
+            public string BackgroundColor { get; set; }
+            public DateTime? Date { get; set; }
+        }
         private void InitializeDateRange()
         {
             // Устанавливаем начальный период - текущий год
@@ -52,19 +62,276 @@ namespace Project_bpi
 
             UpdateDateDisplay(startDate, endDate);
 
-            // Устанавливаем даты в календари
-            StartDatePicker.SelectedDate = startDate;
-            EndDatePicker.SelectedDate = endDate;
+            // Инициализируем комбобоксы
+            InitializeDateComboBoxes();
+
+            // Устанавливаем даты в комбобоксы
+            SetDateInComboBoxes(startDate, endDate);
+
+            // Обновляем отображение месяца
+            UpdateCalendarDisplay(today);
+        }
+        private void InitializeDateComboBoxes()
+        {
+            // Заполняем дни (1-31)
+            for (int i = 1; i <= 31; i++)
+            {
+                StartDayComboBox.Items.Add(i);
+                EndDayComboBox.Items.Add(i);
+            }
+
+            // Заполняем месяцы
+            var months = new[]
+            {
+        "Янв", "Фев", "Мар", "Апр", "Май", "Июн",
+        "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"
+    };
+
+            for (int i = 0; i < months.Length; i++)
+            {
+                StartMonthComboBox.Items.Add(new { Text = months[i], Value = i + 1 });
+                EndMonthComboBox.Items.Add(new { Text = months[i], Value = i + 1 });
+            }
+
+            // Заполняем годы (текущий год -5 до +5)
+            int currentYear = DateTime.Today.Year;
+            for (int i = currentYear - 5; i <= currentYear + 5; i++)
+            {
+                StartYearComboBox.Items.Add(i);
+                EndYearComboBox.Items.Add(i);
+            }
+
+            // Настраиваем DisplayMemberPath для месяцев
+            StartMonthComboBox.DisplayMemberPath = "Text";
+            EndMonthComboBox.DisplayMemberPath = "Text";
+        }
+        private void StartDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var startDate = GetStartDateFromComboBoxes();
+            if (startDate.HasValue)
+            {
+                // Обновляем отображение календаря при изменении даты начала
+                UpdateCalendarDisplay(_currentCalendarDate);
+
+                // Если конечная дата не установлена, устанавливаем её такую же
+                var endDate = GetEndDateFromComboBoxes();
+                if (!endDate.HasValue)
+                {
+                    SetDateInComboBoxes(startDate.Value, startDate.Value);
+                }
+            }
+        }
+        private void EndDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var endDate = GetEndDateFromComboBoxes();
+            if (endDate.HasValue)
+            {
+                // Обновляем отображение календаря при изменении конечной даты
+                UpdateCalendarDisplay(_currentCalendarDate);
+
+                // Если начальная дата не установлена, устанавливаем её такую же
+                var startDate = GetStartDateFromComboBoxes();
+                if (!startDate.HasValue)
+                {
+                    SetDateInComboBoxes(endDate.Value, endDate.Value);
+                }
+            }
+        }
+        private DateTime? GetDateFromComboBoxes(ComboBox dayCombo, ComboBox monthCombo, ComboBox yearCombo)
+        {
+            if (dayCombo.SelectedItem != null && monthCombo.SelectedItem != null && yearCombo.SelectedItem != null)
+            {
+                try
+                {
+                    int day = (int)dayCombo.SelectedItem;
+                    int month = ((dynamic)monthCombo.SelectedItem).Value;
+                    int year = (int)yearCombo.SelectedItem;
+
+                    // Проверяем валидность даты (например, 30 февраля)
+                    if (DateTime.DaysInMonth(year, month) >= day)
+                    {
+                        return new DateTime(year, month, day);
+                    }
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+        private DateTime? GetStartDateFromComboBoxes()
+        {
+            return GetDateFromComboBoxes(StartDayComboBox, StartMonthComboBox, StartYearComboBox);
         }
 
-        private void PeriodSelector_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void SetDateInComboBoxes(DateTime startDate, DateTime endDate)
+        {
+            // Устанавливаем начальную дату
+            StartDayComboBox.SelectedItem = startDate.Day;
+            StartMonthComboBox.SelectedIndex = startDate.Month - 1;
+            StartYearComboBox.SelectedItem = startDate.Year;
+
+            // Устанавливаем конечную дату
+            EndDayComboBox.SelectedItem = endDate.Day;
+            EndMonthComboBox.SelectedIndex = endDate.Month - 1;
+            EndYearComboBox.SelectedItem = endDate.Year;
+        }
+        private void UpdateCalendarDisplay(DateTime date)
+        {
+            _currentCalendarDate = date;
+
+            // Обновляем отображение месяца и года
+            CurrentMonthYear.Text = date.ToString("MMMM yyyy", new CultureInfo("ru-RU"));
+
+            // Генерируем дни календаря
+            GenerateCalendarDays(date);
+        }
+        private void GenerateCalendarDays(DateTime date)
+        {
+            var calendarDays = new List<CalendarDay>();
+
+            // Первый день месяца
+            var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            // Последний день месяца
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+            // День недели первого дня месяца (1 - понедельник, 7 - воскресенье)
+            int firstDayOfWeek = ((int)firstDayOfMonth.DayOfWeek == 0) ? 7 : (int)firstDayOfMonth.DayOfWeek;
+
+            // Добавляем дни из предыдущего месяца
+            var previousMonth = firstDayOfMonth.AddMonths(-1);
+            var daysInPreviousMonth = DateTime.DaysInMonth(previousMonth.Year, previousMonth.Month);
+
+            for (int i = daysInPreviousMonth - firstDayOfWeek + 2; i <= daysInPreviousMonth; i++)
+            {
+                calendarDays.Add(new CalendarDay
+                {
+                    Day = i.ToString(),
+                    TextColor = "#adb5bd", // Серый цвет для дней другого месяца
+                    FontWeight = "Normal",
+                    BackgroundColor = "Transparent"
+                });
+            }
+
+            // Добавляем дни текущего месяца
+            for (int i = 1; i <= lastDayOfMonth.Day; i++)
+            {
+                var currentDay = new DateTime(date.Year, date.Month, i);
+                bool isSelected = IsDateInSelectedRange(currentDay);
+                bool isToday = currentDay.Date == DateTime.Today;
+
+                calendarDays.Add(new CalendarDay
+                {
+                    Day = i.ToString(),
+                    TextColor = isSelected ? "White" : (isToday ? "#0167a4" : "#495057"),
+                    FontWeight = isToday ? "Bold" : "Normal",
+                    BackgroundColor = isSelected ? "#0167a4" : "Transparent",
+                    Date = currentDay
+                });
+            }
+
+            // Добавляем дни следующего месяца чтобы заполнить сетку
+            int totalCells = 42; // 6 строк × 7 колонок
+            int nextMonthDay = 1;
+
+            while (calendarDays.Count < totalCells)
+            {
+                calendarDays.Add(new CalendarDay
+                {
+                    Day = nextMonthDay.ToString(),
+                    TextColor = "#adb5bd", // Серый цвет для дней другого месяца
+                    FontWeight = "Normal",
+                    BackgroundColor = "Transparent"
+                });
+                nextMonthDay++;
+            }
+
+            CalendarDays.ItemsSource = calendarDays;
+        }
+        private DateTime? GetEndDateFromComboBoxes()
+        {
+            return GetDateFromComboBoxes(EndDayComboBox, EndMonthComboBox, EndYearComboBox);
+        }
+        private bool IsDateInSelectedRange(DateTime date)
+        {
+            var startDate = GetStartDateFromComboBoxes();
+            var endDate = GetEndDateFromComboBoxes();
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                return date.Date >= startDate.Value.Date && date.Date <= endDate.Value.Date;
+            }
+            else if (startDate.HasValue && !endDate.HasValue)
+            {
+                // Если выбрана только начальная дата - подсвечиваем только её
+                return date.Date == startDate.Value.Date;
+            }
+
+            return false;
+        }
+        private void CalendarDay_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border && border.DataContext is CalendarDay day && day.Date.HasValue)
+            {
+                var clickedDate = day.Date.Value;
+
+                // Если выбранная дата из другого месяца - переключаем отображение
+                if (clickedDate.Month != _currentCalendarDate.Month || clickedDate.Year != _currentCalendarDate.Year)
+                {
+                    _currentCalendarDate = new DateTime(clickedDate.Year, clickedDate.Month, 1);
+                }
+
+                var currentStartDate = GetStartDateFromComboBoxes();
+                var currentEndDate = GetEndDateFromComboBoxes();
+
+                // Если даты не выбраны или выбраны обе - начинаем новый период
+                if (!currentStartDate.HasValue || !currentEndDate.HasValue ||
+                    (currentStartDate.HasValue && currentEndDate.HasValue))
+                {
+                    // Начинаем новый период (один день)
+                    SetDateInComboBoxes(clickedDate, clickedDate);
+                }
+                else if (currentStartDate.HasValue && !currentEndDate.HasValue)
+                {
+                    // Продолжаем выбор периода - устанавливаем конечную дату
+                    if (clickedDate < currentStartDate.Value)
+                    {
+                        // Если кликнули дату раньше начала - меняем начало
+                        SetDateInComboBoxes(clickedDate, clickedDate);
+                    }
+                    else
+                    {
+                        // Если кликнули дату позже начала - устанавливаем конец
+                        SetDateInComboBoxes(currentStartDate.Value, clickedDate);
+                    }
+                }
+
+                // Обновляем отображение календаря
+                UpdateCalendarDisplay(_currentCalendarDate);
+            }
+        }
+
+        private void PreviousMonth_Click(object sender, RoutedEventArgs e)
+        {
+            // Переход к предыдущему месяцу
+            _currentCalendarDate = _currentCalendarDate.AddMonths(-1);
+            UpdateCalendarDisplay(_currentCalendarDate);
+        }
+        private void NextMonth_Click(object sender, RoutedEventArgs e)
+        {
+            // Переход к следующему месяцу
+            _currentCalendarDate = _currentCalendarDate.AddMonths(1);
+            UpdateCalendarDisplay(_currentCalendarDate);
+        }
+        private void PeriodSelector_Click(object sender, RoutedEventArgs e)
         {
             OpenCalendarPopup();
         }
 
         private void OpenCalendarPopup()
         {
-            // Устанавливаем текущие даты из отображаемого периода
+            // Устанавливаем текущие даты из отображаемого периода в комбобоксы
             var currentText = DateRangeText.Text;
             var yearText = YearText.Text;
 
@@ -73,66 +340,35 @@ namespace Project_bpi
                 var parts = currentText.Split(new[] { " - " }, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length == 2)
                 {
-                    // Если годы разные (формат "2024-2025")
-                    if (yearText.Contains("-"))
-                    {
-                        var yearParts = yearText.Split('-');
-                        if (yearParts.Length == 2 && int.TryParse(yearParts[0], out int startYear))
-                        {
-                            if (DateTime.TryParseExact(parts[0].Trim() + "." + startYear, "dd.MM.yyyy",
-                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
-                            {
-                                StartDatePicker.SelectedDate = startDate;
-                            }
-                        }
-                        if (yearParts.Length == 2 && int.TryParse(yearParts[1], out int endYear))
-                        {
-                            if (DateTime.TryParseExact(parts[1].Trim() + "." + endYear, "dd.MM.yyyy",
-                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
-                            {
-                                EndDatePicker.SelectedDate = endDate;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // Если год один
-                        if (int.TryParse(yearText, out int currentYear))
-                        {
-                            if (DateTime.TryParseExact(parts[0].Trim() + "." + currentYear, "dd.MM.yyyy",
-                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
-                            {
-                                StartDatePicker.SelectedDate = startDate;
-                            }
+                    DateTime startDate, endDate;
 
-                            if (DateTime.TryParseExact(parts[1].Trim() + "." + currentYear, "dd.MM.yyyy",
-                                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
-                            {
-                                EndDatePicker.SelectedDate = endDate;
-                            }
+                    // Если год один
+                    if (int.TryParse(yearText, out int currentYear))
+                    {
+                        if (DateTime.TryParseExact(parts[0].Trim() + "." + currentYear, "dd.MM.yyyy",
+                            CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate) &&
+                            DateTime.TryParseExact(parts[1].Trim() + "." + currentYear, "dd.MM.yyyy",
+                            CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
+                        {
+                            SetDateInComboBoxes(startDate, endDate);
                         }
                     }
                 }
             }
 
+            // Обновляем отображение календаря
+            UpdateCalendarDisplay(_currentCalendarDate);
+
             // Открываем popup
             CalendarPopup.IsOpen = true;
-
-            // Фокусируем первый календарь и открываем его dropdown
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                StartDatePicker.Focus();
-                StartDatePicker.IsDropDownOpen = true;
-            }), System.Windows.Threading.DispatcherPriority.Render);
         }
-
         private void ApplyDateRange_Click(object sender, RoutedEventArgs e)
         {
-            if (StartDatePicker.SelectedDate.HasValue && EndDatePicker.SelectedDate.HasValue)
-            {
-                var startDate = StartDatePicker.SelectedDate.Value;
-                var endDate = EndDatePicker.SelectedDate.Value;
+            var startDate = GetStartDateFromComboBoxes();
+            var endDate = GetEndDateFromComboBoxes();
 
+            if (startDate.HasValue && endDate.HasValue)
+            {
                 // Проверяем, чтобы начальная дата была раньше конечной
                 if (startDate > endDate)
                 {
@@ -141,7 +377,7 @@ namespace Project_bpi
                     return;
                 }
 
-                UpdateDateDisplay(startDate, endDate);
+                UpdateDateDisplay(startDate.Value, endDate.Value);
                 CalendarPopup.IsOpen = false;
             }
             else
@@ -151,11 +387,15 @@ namespace Project_bpi
             }
         }
 
+
         private void CancelDateRange_Click(object sender, RoutedEventArgs e)
         {
             CalendarPopup.IsOpen = false;
         }
-
+        private string FormatDateForCalendar(DateTime date)
+        {
+            return $"{date:dd MM yy}"; // Формат "27 10 25"
+        }
         private void UpdateDateDisplay(DateTime startDate, DateTime endDate)
         {
             // Обновляем отображение периода
@@ -175,7 +415,18 @@ namespace Project_bpi
 
             OnDateRangeChanged(startDate, endDate);
         }
+        private bool TryParseCalendarDate(string dateText, out DateTime result)
+        {
+            // Парсим дату из формата "27 10 25"
+            if (DateTime.TryParseExact(dateText, "dd MM yy",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+            {
+                return true;
+            }
 
+            // Альтернативные форматы, если основной не сработал
+            return DateTime.TryParse(dateText, out result);
+        }
         private void OnDateRangeChanged(DateTime startDate, DateTime endDate)
         {
             // Здесь можно добавить логику обновления данных при изменении периода
@@ -323,7 +574,6 @@ namespace Project_bpi
                 };
             }
         }
-
         private void Item_12_Click(object sender, MouseButtonEventArgs e)
         {
             MenuItem_Click(sender, e);
@@ -414,7 +664,6 @@ namespace Project_bpi
                 }
             }
         }
-
         private void FilterMenuItem(Border border, string query)
         {
             TextBlock tb = null;
@@ -429,11 +678,5 @@ namespace Project_bpi
                 border.Visibility = match ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-
-
-
-
-
-
     }
 }
