@@ -7,6 +7,7 @@
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <!-- Стили для таблицы -->
         <Style x:Key="TableHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -24,6 +25,7 @@
             <Setter Property="Margin" Value="2"/>
         </Style>
 
+        <!-- Стиль для Action-кнопок (Создать, Редактировать, Удалить, Загрузить таблицу) -->
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#0167a4"/>
             <Setter Property="Foreground" Value="White"/>
@@ -32,175 +34,247 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="15"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#015a8f"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#014d78"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <!-- Стиль для кнопки Сохранить -->
         <Style x:Key="SaveButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#0167a4"/>
+            <Setter Property="Background" Value="#00bf63"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="20,10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="15"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#00a854"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#009147"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="20">
                 <!-- Заголовок раздела -->
-                <TextBlock Text="1. Договорная деятельность" 
-                           FontSize="14" FontWeight="Bold" Foreground="#0167a4"
-                           Margin="0,0,0,10"/>
+                <Border CornerRadius="35" 
+                        Margin="10" 
+                        Padding="15">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#5394ba" Offset="0"/>
+                            <GradientStop Color="#0167a4" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                <TextBlock Text="1.2 Хоздоговорные научно-исследовательские работы кафедры (НИЦ, НИЛ, НИГ)" 
-                           FontSize="12" FontWeight="Bold" Foreground="#0167a4"
-                           Margin="0,0,0,20"/>
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="1. Договорная деятельность" 
+                                   FontSize="14" 
+                                   FontWeight="Bold" 
+                                   Foreground="White"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,10"/>
 
-                <!-- Основная таблица -->
-                <Border BorderBrush="Black" BorderThickness="1" Background="White">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Шапка таблицы -->
-                        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <!-- № договора -->
-                                    <ColumnDefinition Width="250"/>
-                                    <!-- Наименование -->
-                                    <ColumnDefinition Width="80"/>
-                                    <!-- Стоимость НИР -->
-                                    <ColumnDefinition Width="100"/>
-                                    <!-- Заказчик -->
-                                    <ColumnDefinition Width="60"/>
-                                    <!-- Акты -->
-                                    <ColumnDefinition Width="60"/>
-                                    <!-- Оплата -->
-                                    <ColumnDefinition Width="200"/>
-                                    <!-- Краткая характеристика -->
-                                </Grid.ColumnDefinitions>
-
-                                <!-- № договора -->
-                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="№ договора" Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Наименование -->
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Наименование (основание к ее выполнению: распоряжение ОАО «РЖД», научно-техническая программа и т.п.) и Ф.И.О. руководителя" 
-                                               Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Стоимость НИР -->
-                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Стоимость НИР в 2о… г." Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Заказчик -->
-                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Заказчик" Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Фактическое выполнение НИР -->
-                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" Grid.ColumnSpan="2">
-                                    <TextBlock Text="Фактическое выполнение НИР, тыс. руб." Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Краткая характеристика -->
-                                <Border Grid.Column="6">
-                                    <TextBlock Text="Краткая характеристика выполненных разделов темы" Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-
-                        <!-- Подзаголовки для Фактическое выполнение -->
-                        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="250"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="200"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Пустые ячейки для первых четырех колонок -->
-                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-
-                                <!-- Акты -->
-                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Акты" Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Оплата -->
-                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="Оплата" Style="{StaticResource TableHeaderStyle}"/>
-                                </Border>
-
-                                <!-- Пустая ячейка для характеристики -->
-                                <Border Grid.Column="6"/>
-                            </Grid>
-                        </Border>
-
-                        <!-- Тело таблицы с данными -->
-                        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="250"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="200"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Пример строки данных -->
-                                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="1" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="2" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="3" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="4" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="5" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                    <TextBlock Text="6" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-
-                                <Border Grid.Column="6">
-                                    <TextBlock Text="7" Style="{StaticResource TableCellStyle}"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                        <TextBlock Text="1.2 Хоздоговорные научно-исследовательские работы кафедры (НИЦ, НИЛ, НИГ)" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   Foreground="White"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,5"/>
+                    </StackPanel>
                 </Border>
 
+                <!-- Кнопка Загрузить таблицу -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+                    <Button Content="Загрузка таблицы" Style="{StaticResource ActionButtonStyle}"/>
+                </StackPanel>
+
+                <!-- Контейнер для таблицы и кнопки фильтра -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Основная таблица -->
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Background="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Шапка таблицы -->
+                            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MaxWidth="50"/>
+                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
+                                        <ColumnDefinition Width="*" MaxWidth="100"/>
+                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="№ договора" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="Наименование (основание к ее выполнению: распоряжение ОАО «РЖД», научно-техническая программа и т.п.) и Ф.И.О. руководителя" 
+                                                   Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="Стоимость НИР в 2о… г." Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="Заказчик" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0" Grid.ColumnSpan="2">
+                                        <TextBlock Text="Фактическое выполнение НИР, тыс. руб." Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="6">
+                                        <TextBlock Text="Краткая характеристика выполненных разделов темы" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Подзаголовки для Фактическое выполнение -->
+                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MaxWidth="50"/>
+                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
+                                        <ColumnDefinition Width="*" MaxWidth="100"/>
+                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="Акты" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="Оплата" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="6"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Тело таблицы с данными -->
+                            <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MaxWidth="50"/>
+                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
+                                        <ColumnDefinition Width="*" MaxWidth="100"/>
+                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="1" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="2" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="3" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="4" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="5" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="6" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+
+                                    <Border Grid.Column="6">
+                                        <TextBlock Text="7" Style="{StaticResource TableCellStyle}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Кнопка фильтра справа от таблицы -->
+                    <Button x:Name="FilterButton"
+                            Grid.Column="1" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top"
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Margin="10,0,0,0" 
+                            Width="25" 
+                            Height="25">
+                        <Image Source="/Снимок экрана 2025-11-17 121115.png" Stretch="Fill"/>
+                    </Button>
+                </Grid>
+
                 <!-- Кнопки управления -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
                     <Button Content="Создать" Style="{StaticResource ActionButtonStyle}"/>
                     <Button Content="Редактировать" Style="{StaticResource ActionButtonStyle}"/>
                     <Button Content="Удалить" Style="{StaticResource ActionButtonStyle}"/>
@@ -210,10 +284,9 @@
 
         <!-- Кнопка Сохранить в правом нижнем углу -->
         <Button Content="Сохранить" 
-        Style="{StaticResource SaveButtonStyle}"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Bottom"
-        Background = "green"
-        Margin="0,0,20,20"/>
+                Style="{StaticResource SaveButtonStyle}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,20,20"/>
     </Grid>
 </UserControl>
