@@ -89,6 +89,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
         <!-- Стиль для иконки сортировки в заголовках -->
         <Style x:Key="SortButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="20"/>
@@ -131,9 +132,239 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Стиль для кнопок сортировки -->
+        <Style x:Key="SortActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#558bb1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="206"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                Padding="10,0">
+                            <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Content}" 
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,5,0"/>
+                                <ContentPresenter Content="{TemplateBinding Tag}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#4a7da1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3f6f90"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для кнопки Отмена -->
+        <Style x:Key="CancelButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#8a8a8a"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="87"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#7a7a7a"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6a6a6a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для кнопки OK -->
+        <Style x:Key="OkButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#005e9d"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#005285"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#004670"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для ComboBox -->
+        <Style x:Key="FilterComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Width" Value="206"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="10,0"/>
+        </Style>
+
+        <!-- Стиль для TextBox поиска со скругленными углами -->
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#005e9d"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Width" Value="206"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="15"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                  VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для области результатов поиска -->
+        <Style x:Key="SearchResultsStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#005e9d"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Width" Value="206"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Margin" Value="0,5,0,10"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
+        <!-- Окно фильтрации и сортировки -->
+        <Border x:Name="FilterSortPanel"
+                Background="#b8b8b8"
+                CornerRadius="10"
+                Width="246"
+                Height="348"
+                Visibility="Collapsed"
+                Panel.ZIndex="1000"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="50,50,0,0">
+            <StackPanel Margin="20,15">
+                <!-- Кнопка сортировки по возрастанию -->
+                <Button x:Name="SortAscButton"
+                        Content="Сортировать по"
+                        Style="{StaticResource SortActionButtonStyle}"
+                        Margin="0,0,0,10">
+                    <Button.Tag>
+                        <TextBlock Text="↑" FontWeight="Bold"/>
+                    </Button.Tag>
+                </Button>
+
+                <!-- Кнопка сортировки по убыванию -->
+                <Button x:Name="SortDescButton"
+                        Content="Сортировать по"
+                        Style="{StaticResource SortActionButtonStyle}"
+                        Margin="0,0,0,10">
+                    <Button.Tag>
+                        <TextBlock Text="↓" FontWeight="Bold"/>
+                    </Button.Tag>
+                </Button>
+
+                <!-- Выпадающий список фильтров -->
+                <ComboBox x:Name="FilterTypeComboBox"
+                          Style="{StaticResource FilterComboBoxStyle}"
+                          Margin="0,0,0,10">
+                    <ComboBoxItem Content="Фильтровать по значению"/>
+                    <ComboBoxItem Content="Фильтровать по алфавиту"/>
+                </ComboBox>
+
+                <!-- Окно поиска -->
+                <TextBox x:Name="SearchTextBox"
+                         Style="{StaticResource SearchTextBoxStyle}"
+                         Text="Поиск..."
+                         Margin="0,0,0,5"/>
+
+                <!-- Результаты поиска -->
+                <Border Style="{StaticResource SearchResultsStyle}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="SearchResultsPanel"/>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Кнопки внизу -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="CancelButton"
+                            Grid.Column="1"
+                            Content="Отмена"
+                            Style="{StaticResource CancelButtonStyle}"
+                            Margin="0,0,10,0"
+                            Click="OnCancelButtonClick"/>
+
+                    <Button x:Name="OkButton"
+                            Grid.Column="2"
+                            Content="ОК"
+                            Style="{StaticResource OkButtonStyle}"
+                            Click="OnOkButtonClick"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="20">
                 <!-- Заголовок раздела -->
