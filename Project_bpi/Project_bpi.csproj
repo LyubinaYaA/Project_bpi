@@ -55,8 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MaxHeightConverter.cs" />
     <Compile Include="TemplatesPage.xaml.cs">
       <DependentUpon>TemplatesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="СooperationProductionView.xaml.cs">
+      <DependentUpon>СooperationProductionView.xaml</DependentUpon>
     </Compile>
     <Page Include="ArchivePage.xaml">
       <SubType>Designer</SubType>
@@ -85,6 +89,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="TemplatesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="СooperationProductionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

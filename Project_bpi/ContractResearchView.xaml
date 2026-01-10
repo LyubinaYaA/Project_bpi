@@ -291,7 +291,7 @@
         <!-- Окно фильтрации и сортировки -->
         <Border x:Name="FilterSortPanel"
                 Background="#b8b8b8"
-                CornerRadius="10"
+                CornerRadius="25"
                 Width="246"
                 Height="348"
                 Visibility="Collapsed"
