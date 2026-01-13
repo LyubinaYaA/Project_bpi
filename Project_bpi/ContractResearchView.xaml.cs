@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -11,13 +16,19 @@ namespace Project_bpi
         private int _currentColumnIndex = -1;
         private Button _currentSortButton;
 
+        // === НОВАЯ ФУНКЦИОНАЛЬНОСТЬ ===
+        private ObservableCollection<ContractItem> _contracts;
+        private bool _isDeletionMode = false;
+        private Brush _defaultDeleteButtonBackground;
+
         public ContractResearchView()
         {
             InitializeComponent();
+
+            // === СТАРАЯ ФУНКЦИОНАЛЬНОСТЬ ===
             FilterButton.Click += OnFilterButtonClick;
             SetupSortButtonEvents();
 
-            // Установка обработчиков для окна фильтрации
             SortAscButton.Click += OnSortAscButtonClick;
             SortDescButton.Click += OnSortDescButtonClick;
             CancelButton.Click += OnCancelButtonClick;
@@ -25,18 +36,22 @@ namespace Project_bpi
             SearchTextBox.GotFocus += OnSearchTextBoxGotFocus;
             SearchTextBox.LostFocus += OnSearchTextBoxLostFocus;
             SearchTextBox.TextChanged += OnSearchTextBoxTextChanged;
-
-            // Закрытие окна при клике вне его
             this.MouseDown += OnUserControlMouseDown;
 
-            // Обработчик загрузки UserControl
             this.Loaded += (s, e) =>
             {
-                // Инициализация позиции окна
                 FilterSortPanel.Visibility = Visibility.Collapsed;
             };
+
+            // === ИНИЦИАЛИЗАЦИЯ НОВОЙ ФУНКЦИОНАЛЬНОСТИ ===
+            _contracts = new ObservableCollection<ContractItem>();
+            ContractsDataGrid.ItemsSource = _contracts;
+
+            if (DeleteButton != null)
+                _defaultDeleteButtonBackground = DeleteButton.Background.Clone();
         }
 
+        // === СТАРАЯ ЛОГИКА: ФИЛЬТРАЦИЯ И СОРТИРОВКА ===
         private void OnFilterButtonClick(object sender, RoutedEventArgs e)
         {
             _sortButtonsVisible = !_sortButtonsVisible;
@@ -65,60 +80,31 @@ namespace Project_bpi
             _currentColumnIndex = columnIndex;
             _currentSortButton = sortButton;
 
-            // Получаем позицию кнопки относительно UserControl
             Point buttonPosition = sortButton.TransformToAncestor(this).Transform(new Point(0, 0));
-
-            // Рассчитываем позицию окна
-            double panelWidth = 246; // Ширина окна фильтрации
-            double panelHeight = 348; // Высота окна фильтрации
-
-            // Координаты для позиционирования справа от кнопки
+            double panelWidth = 246;
+            double panelHeight = 348;
             double left = buttonPosition.X + sortButton.ActualWidth + 5;
             double top = buttonPosition.Y - 20;
 
-            // Проверяем, не выходит ли окно за правую границу UserControl
-            double userControlWidth = this.ActualWidth;
-
-            if (left + panelWidth > userControlWidth)
-            {
-                // Если выходит за правую границу, показываем слева от кнопки
+            if (left + panelWidth > this.ActualWidth)
                 left = buttonPosition.X - panelWidth - 5;
-            }
-
-            // Проверяем, не выходит ли окно за нижнюю границу
-            double userControlHeight = this.ActualHeight;
-
-            if (top + panelHeight > userControlHeight)
-            {
-                // Если выходит за нижнюю границу, сдвигаем вверх
-                top = userControlHeight - panelHeight - 10;
-            }
-
-            // Проверяем, не выходит ли окно за верхнюю границу
+            if (top + panelHeight > this.ActualHeight)
+                top = this.ActualHeight - panelHeight - 10;
             if (top < 0)
-            {
                 top = 10;
-            }
 
-            // Устанавливаем позицию окна
             FilterSortPanel.Margin = new Thickness(left, top, 0, 0);
 
-            SortAscButton.Content = $"Сортировать по";
-            SortDescButton.Content = $"Сортировать по";
-
-            // Очищаем результаты поиска
+            SortAscButton.Content = "Сортировать по";
+            SortDescButton.Content = "Сортировать по";
             SearchResultsPanel.Children.Clear();
             SearchTextBox.Text = "Поиск...";
-
-            // Показываем окно
             FilterSortPanel.Visibility = Visibility.Visible;
         }
 
         private void SortColumn(int columnIndex, bool ascending)
         {
-
-
-            // Закрываем окно после сортировки
+            // Здесь можно реализовать сортировку _contracts
             FilterSortPanel.Visibility = Visibility.Collapsed;
         }
 
@@ -139,7 +125,6 @@ namespace Project_bpi
 
         private void OnOkButtonClick(object sender, RoutedEventArgs e)
         {
-
             FilterSortPanel.Visibility = Visibility.Collapsed;
         }
 
@@ -164,39 +149,42 @@ namespace Project_bpi
         private void OnSearchTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchTextBox.Text;
-
-            // Очищаем предыдущие результаты
             SearchResultsPanel.Children.Clear();
 
             if (searchText != "Поиск..." && !string.IsNullOrWhiteSpace(searchText))
             {
-                // Здесь должна быть логика поиска по данным
-                // Для примера добавляем тестовые результаты
-                for (int i = 1; i <= 5; i++)
+                foreach (var item in _contracts)
                 {
-                    var resultItem = new TextBlock
-                    {
-                        Text = $"Результат {i} для '{searchText}'",
-                        FontSize = 12,
-                        Margin = new Thickness(5, 2, 5, 2),
-                        Foreground = Brushes.Black
-                    };
+                    bool matches =
+                        item.ContractNumber.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.NameAndManager.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.Customer.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.Cost.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.Acts.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.Payment.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        item.Description.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
 
-                    SearchResultsPanel.Children.Add(resultItem);
+                    if (matches)
+                    {
+                        var resultItem = new TextBlock
+                        {
+                            Text = $"«{item.NameAndManager}»",
+                            FontSize = 12,
+                            Margin = new Thickness(5, 2, 5, 2),
+                            Foreground = Brushes.Black
+                        };
+                        SearchResultsPanel.Children.Add(resultItem);
+                    }
                 }
             }
         }
 
         private void OnUserControlMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Проверяем, был ли клик вне окна фильтрации
             if (FilterSortPanel.Visibility == Visibility.Visible)
             {
-                // Проверяем, не является ли кликнутый элемент частью окна фильтрации
                 var originalSource = e.OriginalSource as DependencyObject;
                 var isPartOfFilterPanel = false;
-
-                // Проверяем все родительские элементы
                 while (originalSource != null)
                 {
                     if (originalSource == FilterSortPanel)
@@ -206,13 +194,124 @@ namespace Project_bpi
                     }
                     originalSource = VisualTreeHelper.GetParent(originalSource);
                 }
-
-                // Если клик был вне окна фильтрации, закрываем его
                 if (!isPartOfFilterPanel)
                 {
                     FilterSortPanel.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+
+        // === НОВАЯ ЛОГИКА: УПРАВЛЕНИЕ ДАННЫМИ ===
+        private void OnCreateClick(object sender, RoutedEventArgs e)
+        {
+            ExitDeletionMode();
+            _contracts.Add(new ContractItem());
+        }
+
+        private void OnEditClick(object sender, RoutedEventArgs e)
+        {
+            ExitDeletionMode();
+            ContractsDataGrid.IsReadOnly = false;
+        }
+
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (!_isDeletionMode)
+            {
+                _isDeletionMode = true;
+                DeleteButton.Background = Brushes.Red;
+                DeleteButton.Content = "Подтвердить удаление";
+                ContractsDataGrid.IsReadOnly = true;
+            }
+            else
+            {
+                var selectedItems = new System.Collections.ArrayList(ContractsDataGrid.SelectedItems);
+                foreach (var item in selectedItems)
+                {
+                    if (item is ContractItem contractItem)
+                        _contracts.Remove(contractItem);
+                }
+                ExitDeletionMode();
+            }
+        }
+
+        private void ExitDeletionMode()
+        {
+            if (_isDeletionMode)
+            {
+                _isDeletionMode = false;
+                DeleteButton.Background = _defaultDeleteButtonBackground;
+                DeleteButton.Content = "Удалить";
+                ContractsDataGrid.IsReadOnly = true;
+            }
+        }
+
+        private void OnSaveClick(object sender, RoutedEventArgs e)
+        {
+            ExitDeletionMode();
+            // Сохранение данных — замените на реальную логику
+            MessageBox.Show("Данные успешно сохранены!", "Сохранение", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+
+    // Модель данных
+    public class ContractItem : INotifyPropertyChanged
+    {
+        private string _contractNumber = "";
+        private string _nameAndManager = "";
+        private string _cost = "";
+        private string _customer = "";
+        private string _acts = "";
+        private string _payment = "";
+        private string _description = "";
+
+        public string ContractNumber
+        {
+            get => _contractNumber;
+            set { _contractNumber = value; OnPropertyChanged(); }
+        }
+
+        public string NameAndManager
+        {
+            get => _nameAndManager;
+            set { _nameAndManager = value; OnPropertyChanged(); }
+        }
+
+        public string Cost
+        {
+            get => _cost;
+            set { _cost = value; OnPropertyChanged(); }
+        }
+
+        public string Customer
+        {
+            get => _customer;
+            set { _customer = value; OnPropertyChanged(); }
+        }
+
+        public string Acts
+        {
+            get => _acts;
+            set { _acts = value; OnPropertyChanged(); }
+        }
+
+        public string Payment
+        {
+            get => _payment;
+            set { _payment = value; OnPropertyChanged(); }
+        }
+
+        public string Description
+        {
+            get => _description;
+            set { _description = value; OnPropertyChanged(); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -86,7 +86,6 @@
                     Margin="10" 
                     Padding="15"
                     Height="80">
-                    <!-- Фиксированная высота для стабильности -->
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="#5394ba" Offset="0"/>
@@ -112,7 +111,7 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Основной текстовый блок с динамическим MaxHeight -->
+                <!-- Основной текстовый блок с кастомным ScrollViewer -->
                 <Border CornerRadius="35"
                         Margin="10"
                         Padding="15"
@@ -123,7 +122,8 @@
                         </LinearGradientBrush>
                     </Border.Background>
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                    <ScrollViewer x:Name="ContentScrollViewer"
+                                  VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Disabled">
                         <ScrollViewer.Resources>
                             <!-- Кастомный стиль для вертикального ScrollBar -->
@@ -179,27 +179,42 @@
                             </ControlTemplate>
                         </ScrollViewer.Template>
 
-                        <TextBlock Text="На кафедре имеется базовая кафедра в Новосибирском информационно-вычислительном центре, специалисты которого ведут дисциплины «Информационные системы железнодорожного транспорта» для направления 09.03.02 Информационные системы и технологии, а также «Корпоративные информационные системы на железнодорожном транспорте» для направления 09.03.03 Прикладная информатика. Начальник Новосибирского ИВЦ Шабанов А.Н., главный инженер Шелеметев И.В., а также менеджер по информационным технологиям службы развития процессного управления и управления качеством ГВЦ - филиала ОАО «РЖД» Пинигин С.Ю. являются членами ГЭК по двум направлениям бакалавриата, а также в магистратуре по направлению 09.04.02. Кроме того, начальник аспирантуры ФГУП НИИ СибНИА Железнов Л.П. ведет дисциплину Проектирование информационных систем по направлению 09.03.02 и дисциплину «Методы проектирования информационных систем» по направлению 09.03.03. Ведущий инженер-проектировщик центра финансовых технологий Силкачева О.Н. ведет дисциплину «Информационная безопасность» по направлениям  09.03.02 и 09.03.03. Специалисты ООО «Информационные системы и сервисы» Вавилова С.А., Ксенофонтова М.А. ведут дисциплину «Моделирование бизнес-процессов»."
-                                   FontSize="12"
-                                   Foreground="Black"
-                                   TextWrapping="Wrap"
-                                   TextAlignment="Justify"
-                                   LineHeight="18"/>
+                        <!-- TextBox внутри ScrollViewer -->
+                        <TextBox x:Name="ContentTextBox"
+                                 FontSize="12"
+                                 Foreground="Black"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Justify"
+                                 AcceptsReturn="True"
+                                 AcceptsTab="False"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 Padding="0"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalContentAlignment="Top"
+                                 IsReadOnly="True"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 Text="На кафедре имеется базовая кафедра в Новосибирском информационно-вычислительном центре, специалисты которого ведут дисциплины «Информационные системы железнодорожного транспорта» для направления 09.03.02 Информационные системы и технологии, а также «Корпоративные информационные системы на железнодорожном транспорте» для направления 09.03.03 Прикладная информатика. Начальник Новосибирского ИВЦ Шабанов А.Н., главный инженер Шелеметев И.В., а также менеджер по информационным технологиям службы развития процессного управления и управления качеством ГВЦ - филиала ОАО «РЖД» Пинигин С.Ю. являются членами ГЭК по двум направлениям бакалавриата, а также в магистратуре по направлению 09.04.02. Кроме того, начальник аспирантуры ФГУП НИИ СибНИА Железнов Л.П. ведет дисциплину Проектирование информационных систем по направлению 09.03.02 и дисциплину «Методы проектирования информационных систем» по направлению 09.03.03. Ведущий инженер-проектировщик центра финансовых технологий Силкачева О.Н. ведет дисциплину «Информационная безопасность» по направлениям  09.03.02 и 09.03.03. Специалисты ООО «Информационные системы и сервисы» Вавилова С.А., Ксенофонтова М.А. ведут дисциплину «Моделирование бизнес-процессов»." />
                     </ScrollViewer>
                 </Border>
 
                 <!-- Кнопки управления -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                    <Button Content="Редактировать" Style="{StaticResource ActionButtonStyle}"/>
+                    <Button x:Name="EditButton" Content="Редактировать" Style="{StaticResource ActionButtonStyle}" Click="EditButton_Click"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Кнопка Сохранить в правом нижнем углу -->
-        <Button Content="Сохранить" 
+        <!-- Кнопка Сохранить в правом нижнем углу — ВСЕГДА ВИДНА -->
+        <Button x:Name="SaveButton" 
+                Content="Сохранить" 
                 Style="{StaticResource SaveButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Margin="0,0,20,20"/>
+                Margin="0,0,20,20"
+                Click="SaveButton_Click"
+                IsEnabled="False"/>
     </Grid>
 </UserControl>

@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace Project_bpi
 {
-    /// <summary>
-    /// Логика взаимодействия для СooperationProductionView.xaml
-    /// </summary>
     public partial class СooperationProductionView : UserControl
     {
         public СooperationProductionView()
         {
             InitializeComponent();
+        }
+
+        private void EditButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ContentTextBox.IsReadOnly = false;
+            ContentTextBox.Focus();
+            SaveButton.IsEnabled = true; // Активируем кнопку сохранения
+        }
+
+        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // 🔽 Здесь — ваша логика сохранения
+            // Например: DataManager.SaveSection("Cooperation", ContentTextBox.Text);
+
+            ContentTextBox.IsReadOnly = true;
+            SaveButton.IsEnabled = false; // Деактивируем после сохранения
+
+            // Опционально: можно уведомить пользователя об успехе
         }
     }
 }

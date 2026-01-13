@@ -7,7 +7,7 @@
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <!-- Стили для таблицы -->
+        <!-- Стили остаются без изменений -->
         <Style x:Key="TableHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -17,15 +17,6 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
-        <Style x:Key="TableCellStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Margin" Value="2"/>
-        </Style>
-
-        <!-- Стиль для Action-кнопок (Создать, Редактировать, Удалить, Загрузить таблицу) -->
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#0167a4"/>
             <Setter Property="Foreground" Value="White"/>
@@ -58,7 +49,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для кнопки Сохранить -->
         <Style x:Key="SaveButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#00bf63"/>
             <Setter Property="Foreground" Value="White"/>
@@ -90,7 +80,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для иконки сортировки в заголовках -->
         <Style x:Key="SortButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
@@ -116,16 +105,11 @@
                            VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- При наведении -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#20000000"/>
-                                <!-- Можно использовать цвет бренда, например: #200167a4 -->
                             </Trigger>
-
-                            <!-- При нажатии -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#40000000"/>
-                                <!-- Или: #400167a4 -->
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -133,7 +117,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для кнопок сортировки -->
         <Style x:Key="SortActionButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#558bb1"/>
             <Setter Property="Foreground" Value="White"/>
@@ -174,7 +157,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для кнопки Отмена -->
         <Style x:Key="CancelButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#8a8a8a"/>
             <Setter Property="Foreground" Value="White"/>
@@ -206,7 +188,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для кнопки OK -->
         <Style x:Key="OkButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#005e9d"/>
             <Setter Property="Foreground" Value="White"/>
@@ -238,7 +219,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для ComboBox -->
         <Style x:Key="FilterComboBoxStyle" TargetType="ComboBox">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Width" Value="206"/>
@@ -249,7 +229,6 @@
             <Setter Property="Padding" Value="10,0"/>
         </Style>
 
-        <!-- Стиль для TextBox поиска со скругленными углами -->
         <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -276,7 +255,6 @@
             </Setter>
         </Style>
 
-        <!-- Стиль для области результатов поиска -->
         <Style x:Key="SearchResultsStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#005e9d"/>
@@ -300,7 +278,6 @@
                 VerticalAlignment="Top"
                 Margin="50,50,0,0">
             <StackPanel Margin="20,15">
-                <!-- Кнопка сортировки по возрастанию -->
                 <Button x:Name="SortAscButton"
                         Content="Сортировать по"
                         Style="{StaticResource SortActionButtonStyle}"
@@ -310,7 +287,6 @@
                     </Button.Tag>
                 </Button>
 
-                <!-- Кнопка сортировки по убыванию -->
                 <Button x:Name="SortDescButton"
                         Content="Сортировать по"
                         Style="{StaticResource SortActionButtonStyle}"
@@ -320,7 +296,6 @@
                     </Button.Tag>
                 </Button>
 
-                <!-- Выпадающий список фильтров -->
                 <ComboBox x:Name="FilterTypeComboBox"
                           Style="{StaticResource FilterComboBoxStyle}"
                           Margin="0,0,0,10">
@@ -328,20 +303,17 @@
                     <ComboBoxItem Content="Фильтровать по алфавиту"/>
                 </ComboBox>
 
-                <!-- Окно поиска -->
                 <TextBox x:Name="SearchTextBox"
                          Style="{StaticResource SearchTextBoxStyle}"
                          Text="Поиск..."
                          Margin="0,0,0,5"/>
 
-                <!-- Результаты поиска -->
                 <Border Style="{StaticResource SearchResultsStyle}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel x:Name="SearchResultsPanel"/>
                     </ScrollViewer>
                 </Border>
 
-                <!-- Кнопки внизу -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -367,7 +339,6 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="20">
-                <!-- Заголовок раздела -->
                 <Border CornerRadius="35" 
                         Margin="10" 
                         Padding="15">
@@ -396,12 +367,10 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Кнопка Загрузить таблицу -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
                     <Button Content="Загрузка таблицы" Style="{StaticResource ActionButtonStyle}"/>
                 </StackPanel>
 
-                <!-- Контейнер для таблицы и кнопки фильтра -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -414,7 +383,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <!-- Шапка таблицы -->
@@ -430,7 +399,6 @@
                                         <ColumnDefinition Width="2*" MaxWidth="250"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- № договора -->
                                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -438,14 +406,13 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="№ договора" Style="{StaticResource TableHeaderStyle}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol0" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
 
-                                    <!-- Наименование и ФИО -->
                                     <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -453,15 +420,14 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="Наименование (основание к ее выполнению: распоряжение ОАО «РЖД», научно-техническая программа и т.п.) и Ф.И.О. руководителя" 
-                           Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol1" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
 
-                                    <!-- Стоимость -->
                                     <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -469,14 +435,13 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="Стоимость НИР в 2о… г." Style="{StaticResource TableHeaderStyle}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol2" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
 
-                                    <!-- Заказчик -->
                                     <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -484,14 +449,13 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="Заказчик" Style="{StaticResource TableHeaderStyle}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol3" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
 
-                                    <!-- Объединённая ячейка: Фактическое выполнение -->
                                     <Border Grid.Column="4" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -499,15 +463,14 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="Фактическое выполнение НИР, тыс. руб." 
-                           Style="{StaticResource TableHeaderStyle}" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       Style="{StaticResource TableHeaderStyle}" 
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol4" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
 
-                                    <!-- Краткая характеристика -->
                                     <Border Grid.Column="6">
                                         <Grid>
                                             <Grid.RowDefinitions>
@@ -515,11 +478,11 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <TextBlock Text="Краткая характеристика выполненных разделов темы" 
-                           Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                       Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol6" Style="{StaticResource SortButtonStyle}" 
-                        Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Visibility="Collapsed" Margin="0,0,4,2"/>
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -555,52 +518,32 @@
                                 </Grid>
                             </Border>
 
-                            <!-- Тело таблицы с данными -->
-                            <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" MaxWidth="50"/>
-                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
-                                        <ColumnDefinition Width="*" MaxWidth="100"/>
-                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="1" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="2" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="3" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="4" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="5" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
-                                        <TextBlock Text="6" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-
-                                    <Border Grid.Column="6">
-                                        <TextBlock Text="7" Style="{StaticResource TableCellStyle}"/>
-                                    </Border>
-                                </Grid>
-                            </Border>
+                            <!-- Тело таблицы — DataGrid -->
+                            <DataGrid x:Name="ContractsDataGrid"
+                                      Grid.Row="2"
+                                      AutoGenerateColumns="False"
+                                      CanUserAddRows="False"
+                                      CanUserDeleteRows="False"
+                                      SelectionMode="Extended"
+                                      HeadersVisibility="None"
+                                      RowHeaderWidth="0"
+                                      Background="White"
+                                      BorderThickness="0"
+                                      IsReadOnly="True"
+                                      Margin="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding ContractNumber, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="50"/>
+                                    <DataGridTextColumn Binding="{Binding NameAndManager, UpdateSourceTrigger=PropertyChanged}" Width="2.5*" MaxWidth="300"/>
+                                    <DataGridTextColumn Binding="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="100"/>
+                                    <DataGridTextColumn Binding="{Binding Customer, UpdateSourceTrigger=PropertyChanged}" Width="1.5*" MaxWidth="150"/>
+                                    <DataGridTextColumn Binding="{Binding Acts, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="80"/>
+                                    <DataGridTextColumn Binding="{Binding Payment, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="80"/>
+                                    <DataGridTextColumn Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="2*" MaxWidth="250"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </Border>
 
-                    <!-- Кнопка фильтра справа от таблицы -->
                     <Button x:Name="FilterButton"
                             Grid.Column="1" 
                             HorizontalAlignment="Left" 
@@ -616,18 +559,20 @@
 
                 <!-- Кнопки управления -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                    <Button Content="Создать" Style="{StaticResource ActionButtonStyle}"/>
-                    <Button Content="Редактировать" Style="{StaticResource ActionButtonStyle}"/>
-                    <Button Content="Удалить" Style="{StaticResource ActionButtonStyle}"/>
+                    <Button Content="Создать" x:Name="CreateButton" Style="{StaticResource ActionButtonStyle}" Click="OnCreateClick"/>
+                    <Button Content="Редактировать" x:Name="EditButton" Style="{StaticResource ActionButtonStyle}" Click="OnEditClick"/>
+                    <Button Content="Удалить" x:Name="DeleteButton" Style="{StaticResource ActionButtonStyle}" Click="OnDeleteClick"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Кнопка Сохранить в правом нижнем углу -->
+        <!-- Кнопка Сохранить -->
         <Button Content="Сохранить" 
+                x:Name="SaveButton"
                 Style="{StaticResource SaveButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Margin="0,0,20,20"/>
+                Margin="0,0,20,20"
+                Click="OnSaveClick"/>
     </Grid>
 </UserControl>
