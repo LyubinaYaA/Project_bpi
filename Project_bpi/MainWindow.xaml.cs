@@ -558,6 +558,10 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new ContractResearchView();
             }
+            else if (menuItem == Item_13)
+            {
+                MainContentControl.Content = new Item_13View();
+            }
             else if (menuItem == Item_15)
             {
                 MainContentControl.Content = new СooperationProductionView();
@@ -587,6 +591,11 @@ namespace Project_bpi
             MenuItem_Click(sender, e);
         }
         private void Item_12_Click(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem_Click(sender, e);
+        }
+
+        private void Item_13_Click(object sender, MouseButtonEventArgs e)
         {
             MenuItem_Click(sender, e);
         }

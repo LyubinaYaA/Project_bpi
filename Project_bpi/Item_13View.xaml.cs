@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Project_bpi
 {
-    public partial class ContractResearchView : UserControl
+    public partial class Item_13View : UserControl
     {
         private bool _sortButtonsVisible = false;
         private int _currentColumnIndex = -1;
@@ -21,7 +21,7 @@ namespace Project_bpi
         private bool _isDeletionMode = false;
         private Brush _defaultDeleteButtonBackground;
 
-        public ContractResearchView()
+        public Item_13View()
         {
             InitializeComponent();
 
@@ -254,5 +254,7 @@ namespace Project_bpi
         }
     }
 
+    // Модель данных
+    
     
 }

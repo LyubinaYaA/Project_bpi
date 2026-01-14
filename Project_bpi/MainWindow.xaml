@@ -220,7 +220,7 @@
                                                 <TextBlock Text="1.2 Хоздоговорные НИР"
                Style="{StaticResource SubMenuStyle1}"/>
                                             </Border>
-                                            <Border x:Name="Item_13" MouseLeftButtonDown="MenuItem_Click"
+                                            <Border x:Name="Item_13" MouseLeftButtonDown="Item_13_Click"
                                                     Tag="sub2"
                                                     Style="{StaticResource MenuItemStyle}">
                                                 <TextBlock Text="1.3 Темы госбюджетных НИ"
