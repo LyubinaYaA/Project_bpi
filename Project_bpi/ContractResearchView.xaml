@@ -387,7 +387,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Шапка таблицы -->
-                            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
+                            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" MaxWidth="50"/>
@@ -489,7 +489,7 @@
                             </Border>
 
                             <!-- Подзаголовки для Фактическое выполнение -->
-                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
+                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" MaxWidth="50"/>
@@ -506,11 +506,11 @@
                                     <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
                                     <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0"/>
 
-                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,1,1,0">
                                         <TextBlock Text="Акты" Style="{StaticResource TableHeaderStyle}"/>
                                     </Border>
 
-                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,1,1,0">
                                         <TextBlock Text="Оплата" Style="{StaticResource TableHeaderStyle}"/>
                                     </Border>
 
@@ -531,15 +531,6 @@
                                       BorderThickness="0"
                                       IsReadOnly="True"
                                       Margin="0">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding ContractNumber, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="50"/>
-                                    <DataGridTextColumn Binding="{Binding NameAndManager, UpdateSourceTrigger=PropertyChanged}" Width="2.5*" MaxWidth="300"/>
-                                    <DataGridTextColumn Binding="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="100"/>
-                                    <DataGridTextColumn Binding="{Binding Customer, UpdateSourceTrigger=PropertyChanged}" Width="1.5*" MaxWidth="150"/>
-                                    <DataGridTextColumn Binding="{Binding Acts, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="80"/>
-                                    <DataGridTextColumn Binding="{Binding Payment, UpdateSourceTrigger=PropertyChanged}" Width="*" MaxWidth="80"/>
-                                    <DataGridTextColumn Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="2*" MaxWidth="250"/>
-                                </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
                     </Border>
@@ -559,9 +550,9 @@
 
                 <!-- Кнопки управления -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                    <Button Content="Создать" x:Name="CreateButton" Style="{StaticResource ActionButtonStyle}" Click="OnCreateClick"/>
-                    <Button Content="Редактировать" x:Name="EditButton" Style="{StaticResource ActionButtonStyle}" Click="OnEditClick"/>
-                    <Button Content="Удалить" x:Name="DeleteButton" Style="{StaticResource ActionButtonStyle}" Click="OnDeleteClick"/>
+                    <Button Content="Создать" x:Name="CreateButton" Style="{StaticResource ActionButtonStyle}"/>
+                    <Button Content="Редактировать" x:Name="EditButton" Style="{StaticResource ActionButtonStyle}"/>
+                    <Button Content="Удалить" x:Name="DeleteButton" Style="{StaticResource ActionButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
@@ -572,7 +563,6 @@
                 Style="{StaticResource SaveButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Margin="0,0,20,20"
-                Click="OnSaveClick"/>
+                Margin="0,0,20,20"/>
     </Grid>
 </UserControl>

@@ -55,12 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ContractItem.cs" />
     <Compile Include="Item11View.xaml.cs">
       <DependentUpon>Item11View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Item_13View.xaml.cs">
       <DependentUpon>Item_13View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item_14View.xaml.cs">
+      <DependentUpon>Item_14View.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaxHeightConverter.cs" />
     <Compile Include="TemplatesPage.xaml.cs">
@@ -82,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Item_13View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item_14View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

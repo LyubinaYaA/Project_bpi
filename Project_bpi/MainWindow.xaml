@@ -226,7 +226,7 @@
                                                 <TextBlock Text="1.3 Темы госбюджетных НИ"
                                                        Style="{StaticResource SubMenuStyle1}"/>
                                             </Border>
-                                            <Border x:Name="Item_14" MouseLeftButtonDown="MenuItem_Click"
+                                            <Border x:Name="Item_14" MouseLeftButtonDown="Item_14_Click"
                                                     Tag="sub2"
                                                     Style="{StaticResource MenuItemStyle}">
                                                 <TextBlock Text="1.4 Реализация результатов НИОКР"

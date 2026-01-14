@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Project_bpi
 {
-    public partial class ContractResearchView : UserControl
+    public partial class Item_14View : UserControl
     {
         private bool _sortButtonsVisible = false;
         private int _currentColumnIndex = -1;
@@ -20,7 +20,7 @@ namespace Project_bpi
         private bool _isDeletionMode = false;
         private Brush _defaultDeleteButtonBackground;
 
-        public ContractResearchView()
+        public Item_14View()
         {
             InitializeComponent();
 
@@ -41,9 +41,6 @@ namespace Project_bpi
                 FilterSortPanel.Visibility = Visibility.Collapsed;
             };
 
-
-            if (DeleteButton != null)
-                _defaultDeleteButtonBackground = DeleteButton.Background.Clone();
         }
 
         // === СТАРАЯ ЛОГИКА: ФИЛЬТРАЦИЯ И СОРТИРОВКА ===
@@ -141,7 +138,7 @@ namespace Project_bpi
             }
         }
 
-        
+
 
         private void OnUserControlMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -165,6 +162,4 @@ namespace Project_bpi
             }
         }
     }
-
-    
 }

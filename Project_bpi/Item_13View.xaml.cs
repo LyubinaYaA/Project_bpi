@@ -17,7 +17,6 @@ namespace Project_bpi
         private Button _currentSortButton;
 
         // === НОВАЯ ФУНКЦИОНАЛЬНОСТЬ ===
-        private ObservableCollection<ContractItem> _contracts;
         private bool _isDeletionMode = false;
         private Brush _defaultDeleteButtonBackground;
 
@@ -35,7 +34,6 @@ namespace Project_bpi
             OkButton.Click += OnOkButtonClick;
             SearchTextBox.GotFocus += OnSearchTextBoxGotFocus;
             SearchTextBox.LostFocus += OnSearchTextBoxLostFocus;
-            SearchTextBox.TextChanged += OnSearchTextBoxTextChanged;
             this.MouseDown += OnUserControlMouseDown;
 
             this.Loaded += (s, e) =>
@@ -43,12 +41,6 @@ namespace Project_bpi
                 FilterSortPanel.Visibility = Visibility.Collapsed;
             };
 
-            // === ИНИЦИАЛИЗАЦИЯ НОВОЙ ФУНКЦИОНАЛЬНОСТИ ===
-            _contracts = new ObservableCollection<ContractItem>();
-            ContractsDataGrid.ItemsSource = _contracts;
-
-            if (DeleteButton != null)
-                _defaultDeleteButtonBackground = DeleteButton.Background.Clone();
         }
 
         // === СТАРАЯ ЛОГИКА: ФИЛЬТРАЦИЯ И СОРТИРОВКА ===
@@ -146,38 +138,7 @@ namespace Project_bpi
             }
         }
 
-        private void OnSearchTextBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string searchText = SearchTextBox.Text;
-            SearchResultsPanel.Children.Clear();
-
-            if (searchText != "Поиск..." && !string.IsNullOrWhiteSpace(searchText))
-            {
-                foreach (var item in _contracts)
-                {
-                    bool matches =
-                        item.ContractNumber.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.NameAndManager.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.Customer.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.Cost.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.Acts.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.Payment.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                        item.Description.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
-
-                    if (matches)
-                    {
-                        var resultItem = new TextBlock
-                        {
-                            Text = $"«{item.NameAndManager}»",
-                            FontSize = 12,
-                            Margin = new Thickness(5, 2, 5, 2),
-                            Foreground = Brushes.Black
-                        };
-                        SearchResultsPanel.Children.Add(resultItem);
-                    }
-                }
-            }
-        }
+        
 
         private void OnUserControlMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -200,61 +161,5 @@ namespace Project_bpi
                 }
             }
         }
-
-        // === НОВАЯ ЛОГИКА: УПРАВЛЕНИЕ ДАННЫМИ ===
-        private void OnCreateClick(object sender, RoutedEventArgs e)
-        {
-            ExitDeletionMode();
-            _contracts.Add(new ContractItem());
-        }
-
-        private void OnEditClick(object sender, RoutedEventArgs e)
-        {
-            ExitDeletionMode();
-            ContractsDataGrid.IsReadOnly = false;
-        }
-
-        private void OnDeleteClick(object sender, RoutedEventArgs e)
-        {
-            if (!_isDeletionMode)
-            {
-                _isDeletionMode = true;
-                DeleteButton.Background = Brushes.Red;
-                DeleteButton.Content = "Подтвердить удаление";
-                ContractsDataGrid.IsReadOnly = true;
-            }
-            else
-            {
-                var selectedItems = new System.Collections.ArrayList(ContractsDataGrid.SelectedItems);
-                foreach (var item in selectedItems)
-                {
-                    if (item is ContractItem contractItem)
-                        _contracts.Remove(contractItem);
-                }
-                ExitDeletionMode();
-            }
-        }
-
-        private void ExitDeletionMode()
-        {
-            if (_isDeletionMode)
-            {
-                _isDeletionMode = false;
-                DeleteButton.Background = _defaultDeleteButtonBackground;
-                DeleteButton.Content = "Удалить";
-                ContractsDataGrid.IsReadOnly = true;
-            }
-        }
-
-        private void OnSaveClick(object sender, RoutedEventArgs e)
-        {
-            ExitDeletionMode();
-            // Сохранение данных — замените на реальную логику
-            MessageBox.Show("Данные успешно сохранены!", "Сохранение", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
     }
-
-    // Модель данных
-    
-    
 }
