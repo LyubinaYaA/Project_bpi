@@ -550,7 +550,11 @@ namespace Project_bpi
 
         private void ShowContentForMenuItem(Border menuItem)
         {
-            if (menuItem == Item_12)
+            if (menuItem == Item_11)
+            {
+                MainContentControl.Content = new Item11View();
+            }
+            else if (menuItem == Item_12)
             {
                 MainContentControl.Content = new ContractResearchView();
             }
@@ -577,6 +581,10 @@ namespace Project_bpi
                     FontSize = 16
                 };
             }
+        }
+        private void Item_11_Click(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem_Click(sender, e);
         }
         private void Item_12_Click(object sender, MouseButtonEventArgs e)
         {

@@ -208,11 +208,11 @@
                                         </Border>
 
                                         <StackPanel x:Name="Section1_Menu" Visibility="Collapsed">
-                                            <Border x:Name="Item_11" MouseLeftButtonDown="MenuItem_Click"
+                                            <Border x:Name="Item_11" MouseLeftButtonDown="Item_11_Click"
                                                     Tag="sub2"
                                                     Style="{StaticResource MenuItemStyle}">
                                                 <TextBlock Text="1.1 Общая характеристика научных исследований"
-                                                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                                       Style="{StaticResource SubMenuStyle1}"/>
                                             </Border>
                                             <Border x:Name="Item_12" MouseLeftButtonDown="Item_12_Click"
         Tag="sub2"
@@ -232,7 +232,7 @@
                                                 <TextBlock Text="1.4 Реализация результатов НИОКР"
                                                        Style="{StaticResource SubMenuStyle1}"/>
                                             </Border>
-                                            <Border x:Name="Item_15" MouseLeftButtonDown="MenuItem_Click"
+                                            <Border x:Name="Item_15" MouseLeftButtonDown="Item_15_Click"
                                                     Tag="sub2"
                                                     Style="{StaticResource MenuItemStyle}">
                                                 <TextBlock Text="1.5 Международные творческие связи и содружество с производством"
