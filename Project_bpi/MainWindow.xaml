@@ -351,9 +351,51 @@
                                         </StackPanel>
                                     </StackPanel>
                                     <!-- Разделы 2-6 -->
-                                    <Border x:Name="Section2_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                        <TextBlock Text="Раздел 2" Style="{StaticResource SubMenuStyle}"/>
-                                    </Border>
+                                    <!-- Раздел 2 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section2_Header"
+            Tag="sub"
+            MouseLeftButtonDown="Section2_Header_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 2" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="NIR_Arrow2" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section2_Menu" Visibility="Collapsed">
+                                            <Border x:Name="Item_21" MouseLeftButtonDown="Item_21_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="АСПИРАНТУРА"
+                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_22" MouseLeftButtonDown="Item_22_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="ДОКТОРАНТУРА"
+                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_23" MouseLeftButtonDown="Item_23_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="ЗАЩИТЫ"
+                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_24" MouseLeftButtonDown="Item_24_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="ПЛАН ЗАЩИТ"
+                       Style="{StaticResource SubMenuStyle1}"/>
+                                            </Border>
+                                            <Border x:Name="Item_25" MouseLeftButtonDown="Item_25_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="ДИССЕРТАЦИОННЫЕ СОВЕТЫ"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
                                     <Border x:Name="Section3_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
                                         <TextBlock Text="Раздел 3" Style="{StaticResource SubMenuStyle}"/>
                                     </Border>

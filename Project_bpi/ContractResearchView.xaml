@@ -499,13 +499,13 @@
                             <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" MaxWidth="50"/>
-                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
-                                        <ColumnDefinition Width="*" MaxWidth="100"/>
-                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
@@ -601,13 +601,13 @@
                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" MaxWidth="50"/>
-                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
-                                        <ColumnDefinition Width="*" MaxWidth="100"/>
-                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
@@ -631,13 +631,13 @@
                             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" MaxWidth="50"/>
-                                        <ColumnDefinition Width="2.5*" MaxWidth="300"/>
-                                        <ColumnDefinition Width="*" MaxWidth="100"/>
-                                        <ColumnDefinition Width="1.5*" MaxWidth="150"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="*" MaxWidth="80"/>
-                                        <ColumnDefinition Width="2*" MaxWidth="250"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">

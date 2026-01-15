@@ -58,6 +58,21 @@
     <Compile Include="Item11View.xaml.cs">
       <DependentUpon>Item11View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Item21_View.xaml.cs">
+      <DependentUpon>Item21_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item22_View.xaml.cs">
+      <DependentUpon>Item22_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item23_View.xaml.cs">
+      <DependentUpon>Item23_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item24_View.xaml.cs">
+      <DependentUpon>Item24_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item25_View.xaml.cs">
+      <DependentUpon>Item25_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item_13View.xaml.cs">
       <DependentUpon>Item_13View.xaml</DependentUpon>
     </Compile>
@@ -80,6 +95,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Item11View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item21_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item22_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item23_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item24_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item25_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
