@@ -357,7 +357,7 @@
                                    TextAlignment="Center"
                                    Margin="0,0,0,10"/>
 
-                        <TextBlock Text="1.3 Темы госбюджетных научных исследований" 
+                        <TextBlock Text="1.4 Реализация результатов НИОКР" 
                                    FontSize="12" 
                                    FontWeight="Bold" 
                                    Foreground="White"
@@ -380,6 +380,7 @@
                     <!-- Основная таблица -->
                     <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Background="White">
                         <Grid>
+                            <!-- Четыре строки: шапка, номера столбцов, данные -->
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -447,9 +448,7 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Заказчик.
-Место внедрения
-" Style="{StaticResource TableHeaderStyle}" 
+                                            <TextBlock Text="Заказчик.&#x0a;Место внедрения" Style="{StaticResource TableHeaderStyle}" 
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol3" Style="{StaticResource SortButtonStyle}" 
                                                     Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -489,7 +488,38 @@
                                 </Grid>
                             </Border>
 
-                           
+                            <!-- === НОВАЯ СТРОКА: Порядковые номера столбцов с границами === -->
+                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MaxWidth="50"/>
+                                        <ColumnDefinition Width="*" MaxWidth="80"/>
+                                        <ColumnDefinition Width="*" MaxWidth="120"/>
+                                        <ColumnDefinition Width="*" MaxWidth="200"/>
+                                        <ColumnDefinition Width="1.5*" MaxWidth="240"/>
+                                        <ColumnDefinition Width="2*" MaxWidth="320"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="1" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="2" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="3" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="4" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <TextBlock Text="5" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,0">
+                                        <TextBlock Text="6" Style="{StaticResource TableHeaderStyle}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
 
                             <!-- Тело таблицы — DataGrid -->
                             <DataGrid x:Name="ContractsDataGrid"
