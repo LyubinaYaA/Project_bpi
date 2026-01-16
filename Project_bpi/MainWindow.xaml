@@ -223,6 +223,15 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!-- Стиль для вложенных подразделов (3-й уровень) -->
+        <Style x:Key="MenuItemSubSubStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="#6c757d"/>
+            <Setter Property="FontFamily" Value="Raleway"/>
+            <Setter Property="Margin" Value="12,0,0,0"/>
+            <!-- Отступ слева -->
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -396,17 +405,161 @@
                                             </Border>
                                         </StackPanel>
                                     </StackPanel>
-                                    <Border x:Name="Section3_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                        <TextBlock Text="Раздел 3" Style="{StaticResource SubMenuStyle}"/>
-                                    </Border>
-                                    <Border x:Name="Section4_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                        <TextBlock Text="Раздел 4" Style="{StaticResource SubMenuStyle}"/>
-                                    </Border>
-                                    <Border x:Name="Section5_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
-                                        <TextBlock Text="Раздел 5" Style="{StaticResource SubMenuStyle}"/>
-                                    </Border>
+                                    <!-- Раздел 3 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section3_Header"
+            Tag="sub"
+            MouseLeftButtonDown="Section3_Header_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 3" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="NIR_Arrow3" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section3_Menu" Visibility="Collapsed">
+                                            <Border x:Name="Item_31" MouseLeftButtonDown="Item_31_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Издательская деятельность сотрудников кафедры и лаборатории"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_32" MouseLeftButtonDown="Item_32_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Публикационная активность профессорско-преподавательского состава кафедры и научных сотрудников лаборатории"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <!-- Раздел 4 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section4_Header"
+            Tag="sub"
+            MouseLeftButtonDown="Section4_Header_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 4" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="NIR_Arrow4" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section4_Menu" Visibility="Collapsed">
+                                            <Border x:Name="Item_41" MouseLeftButtonDown="Item_41_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Общие сведения"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_42" MouseLeftButtonDown="Item_42_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Полученные патенты/положительные решения на изобретения и полезные модели"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_43" MouseLeftButtonDown="Item_43_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Полученные свидетельства на программные продукты и базы данных, электронные ресурсы"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- Раздел 5 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section5_Header"
+            Tag="sub"
+            MouseLeftButtonDown="Section5_Header_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 5" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="NIR_Arrow5" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section5_Menu" Visibility="Collapsed">
+                                            <!-- Реализуемые стартап-проекты (с подменю) -->
+                                            <StackPanel>
+                                                <Border x:Name="Item_51"
+            Tag="sub2"
+            MouseLeftButtonDown="Item_51_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Реализуемые стартап-проекты"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                                        <Image x:Name="NIR_Arrow51" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <StackPanel x:Name="Item_51_SubMenu" Visibility="Collapsed">
+                                                    <Border x:Name="Item_51a" MouseLeftButtonDown="Item_51a_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                        <TextBlock Text="Планируемые стартап-проекты"
+                       Style="{StaticResource MenuItemSubSubStyle}" TextWrapping="Wrap"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <!-- Участие в конкурсах, грантах -->
+                                            <Border x:Name="Item_52" MouseLeftButtonDown="Item_52_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Участие в конкурсах, грантах"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+
+                                            <!-- Научные конференции (с подменю) -->
+                                            <StackPanel>
+                                                <Border x:Name="Item_53"
+            Tag="sub2"
+            MouseLeftButtonDown="Item_53_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="Научные конференции"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                                        <Image x:Name="NIR_Arrow53" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                <StackPanel x:Name="Item_53_SubMenu" Visibility="Collapsed">
+                                                    <Border x:Name="Item_53a" MouseLeftButtonDown="Item_53a_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                        <TextBlock Text="Организованные конференции"
+                       Style="{StaticResource MenuItemSubSubStyle}" TextWrapping="Wrap"/>
+                                                    </Border>
+                                                    <Border x:Name="Item_53b" MouseLeftButtonDown="Item_53b_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                        <TextBlock Text="План проведения конференций, семинаров, совещаний в 2025 г."
+                       Style="{StaticResource MenuItemSubSubStyle}" TextWrapping="Wrap"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <!-- Участие в выставках-ярмарках -->
+                                            <Border x:Name="Item_54" MouseLeftButtonDown="Item_54_Click"
+                Tag="sub2"
+                Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Участие в выставках-ярмарках"
+                       Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- Раздел 6 (остаётся простым, без подменю) -->
                                     <Border x:Name="Section6_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
                                         <TextBlock Text="Раздел 6" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+
+                                    <!-- Новые разделы 7, 8, 9 -->
+                                    <Border x:Name="Section7_Header" Tag="sub" MouseLeftButtonDown="Section7_Header_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 7" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section8_Header" Tag="sub" MouseLeftButtonDown="Section8_Header_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 8" Style="{StaticResource SubMenuStyle}"/>
+                                    </Border>
+                                    <Border x:Name="Section9_Header" Tag="sub" MouseLeftButtonDown="Section9_Header_Click" Style="{StaticResource MenuItemStyle}">
+                                        <TextBlock Text="Раздел 9" Style="{StaticResource SubMenuStyle}"/>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>

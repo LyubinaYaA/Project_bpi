@@ -39,6 +39,9 @@ namespace Project_bpi
             parents[Section4_Header] = NIR_Header;
             parents[Section5_Header] = NIR_Header;
             parents[Section6_Header] = NIR_Header;
+            parents[Section7_Header] = NIR_Header;
+            parents[Section8_Header] = NIR_Header;
+            parents[Section9_Header] = NIR_Header;
 
             // 2-й уровень → Раздел 1
             parents[Item_11] = Section1_Header;
@@ -53,6 +56,28 @@ namespace Project_bpi
             parents[Item_23] = Section2_Header;
             parents[Item_24] = Section2_Header;
             parents[Item_25] = Section2_Header;
+
+            // 2-й уровень → Раздел 3
+            parents[Item_31] = Section3_Header;
+            parents[Item_32] = Section3_Header;
+
+            // 2-й уровень → Раздел 4
+            parents[Item_41] = Section4_Header;
+            parents[Item_42] = Section4_Header;
+            parents[Item_43] = Section4_Header;
+
+            // 2-й уровень → Раздел 5
+            parents[Item_51] = Section5_Header;
+            parents[Item_52] = Section5_Header;
+            parents[Item_53] = Section5_Header;
+            parents[Item_54] = Section5_Header;
+
+            // 3-й уровень → Подразделы внутри "Реализуемые стартап-проекты"
+            parents[Item_51a] = Item_51;
+
+            // 3-й уровень → Подразделы внутри "Научные конференции"
+            parents[Item_53a] = Item_53;
+            parents[Item_53b] = Item_53;
         }
 
         public class CalendarDay
@@ -424,6 +449,29 @@ namespace Project_bpi
             MenuItem_Click(sender, e);
         }
 
+        private void Section3_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Section3_Menu, NIR_Arrow3);
+            MenuItem_Click(sender, e);
+        }
+
+        private void Section4_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Section4_Menu, NIR_Arrow4);
+            MenuItem_Click(sender, e);
+        }
+
+        private void Section5_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Section5_Menu, NIR_Arrow5);
+            MenuItem_Click(sender, e);
+        }
+
+        // Простые разделы без подменю
+        private void Section7_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Section8_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Section9_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+
         private void ToggleSectionMenu(StackPanel menu, Image arrow)
         {
             if (menu.Visibility == Visibility.Visible)
@@ -436,6 +484,19 @@ namespace Project_bpi
                 menu.Visibility = Visibility.Visible;
                 arrow.LayoutTransform = new RotateTransform(90);
             }
+        }
+
+        // Вложенные подразделы
+        private void Item_51_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Item_51_SubMenu, NIR_Arrow51);
+            MenuItem_Click(sender, e);
+        }
+
+        private void Item_53_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Item_53_SubMenu, NIR_Arrow53);
+            MenuItem_Click(sender, e);
         }
 
         Border currentActive = null;
@@ -565,6 +626,54 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new Item25_View();
             }
+            else if (menuItem == Item_31)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Издательская деятельность сотрудников кафедры и лаборатории", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_32)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Публикационная активность профессорско-преподавательского состава кафедры и научных сотрудников лаборатории", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_41)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Общие сведения", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_42)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Полученные патенты/положительные решения на изобретения и полезные модели", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_43)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Полученные свидетельства на программные продукты и базы данных, электронные ресурсы", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_51)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Реализуемые стартап-проекты", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_51a)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Планируемые стартап-проекты", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_52)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Участие в конкурсах, грантах", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_53)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Научные конференции", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_53a)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Организованные конференции", FontSize = 18, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_53b)
+            {
+                MainContentControl.Content = new TextBlock { Text = "План проведения конференций, семинаров, совещаний в 2025 г.", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
+            else if (menuItem == Item_54)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Участие в выставках-ярмарках", FontSize = 18, Margin = new Thickness(20) };
+            }
             else if (menuItem == Item_Archive)
             {
                 MainContentControl.Content = new ArchivePage();
@@ -572,6 +681,17 @@ namespace Project_bpi
             else if (menuItem == Item_Templates)
             {
                 MainContentControl.Content = new TemplatesPage();
+            }
+            else if (menuItem == Section7_Header || menuItem == Section8_Header || menuItem == Section9_Header)
+            {
+                MainContentControl.Content = new TextBlock
+                {
+                    Text = $"Содержимое {menuItem.Name}",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = Brushes.Gray,
+                    FontSize = 16
+                };
             }
             else
             {
@@ -592,6 +712,19 @@ namespace Project_bpi
         private void Item_23_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Item_24_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Item_25_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+
+        private void Item_31_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_32_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+
+        private void Item_41_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_42_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_43_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+
+        private void Item_51a_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_52_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_53a_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_53b_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_54_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
 
         private void Item_11_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Item_12_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
@@ -625,6 +758,11 @@ namespace Project_bpi
             NIR_Arrow.Visibility = IsActive(NIR_Header) ? Visibility.Collapsed : Visibility.Visible;
             NIR_Arrow1.Visibility = IsActive(Section1_Header) ? Visibility.Collapsed : Visibility.Visible;
             NIR_Arrow2.Visibility = IsActive(Section2_Header) ? Visibility.Collapsed : Visibility.Visible;
+            NIR_Arrow3.Visibility = IsActive(Section3_Header) ? Visibility.Collapsed : Visibility.Visible;
+            NIR_Arrow4.Visibility = IsActive(Section4_Header) ? Visibility.Collapsed : Visibility.Visible;
+            NIR_Arrow5.Visibility = IsActive(Section5_Header) ? Visibility.Collapsed : Visibility.Visible;
+            NIR_Arrow51.Visibility = IsActive(Item_51) ? Visibility.Collapsed : Visibility.Visible;
+            NIR_Arrow53.Visibility = IsActive(Item_53) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -649,6 +787,11 @@ namespace Project_bpi
                     StackPanel subPanel = null;
                     if (border.Name == "Section1_Header") subPanel = Section1_Menu;
                     else if (border.Name == "Section2_Header") subPanel = Section2_Menu;
+                    else if (border.Name == "Section3_Header") subPanel = Section3_Menu;
+                    else if (border.Name == "Section4_Header") subPanel = Section4_Menu;
+                    else if (border.Name == "Section5_Header") subPanel = Section5_Menu;
+                    else if (border.Name == "Item_51") subPanel = Item_51_SubMenu;
+                    else if (border.Name == "Item_53") subPanel = Item_53_SubMenu;
                     else if (border.Name == "NIR_Header") subPanel = NIR_Menu;
 
                     if (subPanel != null)
