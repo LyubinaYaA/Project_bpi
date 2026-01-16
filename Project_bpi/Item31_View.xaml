@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Project_bpi.Item_13View"
+﻿<UserControl x:Class="Project_bpi.Item31_View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,114 +7,6 @@
              d:DesignHeight="600" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <!-- Стиль для ScrollBar -->
-        <Style x:Key="CustomScrollBar" TargetType="{x:Type ScrollBar}">
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Foreground" Value="#CCCCCC"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Width" Value="8"/>
-            <Setter Property="MinWidth" Value="8"/>
-            <Setter Property="Opacity" Value="0.3"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ScrollBar}">
-                        <Grid x:Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
-                                <Track.Thumb>
-                                    <Thumb Style="{DynamicResource ScrollBarThumbVertical}"/>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="1"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Стиль для Thumb (бегунка) -->
-        <Style x:Key="ScrollBarThumbVertical" TargetType="{x:Type Thumb}">
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border x:Name="rectangle"
-                            Width="8"
-                            Background="#A0A0A0"
-                            CornerRadius="4"
-                            SnapsToDevicePixels="True"/>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="rectangle" Property="Background" Value="#707070"/>
-                            </Trigger>
-                            <Trigger Property="IsDragging" Value="True">
-                                <Setter TargetName="rectangle" Property="Background" Value="#505050"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Стиль для ScrollViewer с красивым скроллом -->
-        <Style x:Key="BeautifulScrollViewer" TargetType="{x:Type ScrollViewer}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                        <Grid x:Name="Grid" Background="{TemplateBinding Background}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <Rectangle x:Name="Corner" Grid.Row="1" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-
-                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                                Grid.Row="0"
-                                                Grid.Column="0"
-                                                Margin="{TemplateBinding Padding}"
-                                                CanContentScroll="{TemplateBinding CanContentScroll}"
-                                                CanHorizontallyScroll="False"
-                                                CanVerticallyScroll="False"
-                                                Content="{TemplateBinding Content}"
-                                                ContentTemplate="{TemplateBinding ContentTemplate}"/>
-
-                            <ScrollBar x:Name="PART_VerticalScrollBar"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   AutomationProperties.AutomationId="VerticalScrollBar"
-                                   Cursor="Arrow"
-                                   Maximum="{TemplateBinding ScrollableHeight}"
-                                   Minimum="0"
-                                   Style="{StaticResource CustomScrollBar}"
-                                   ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-
-                            <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                   Grid.Row="1"
-                                   Grid.Column="0"
-                                   AutomationProperties.AutomationId="HorizontalScrollBar"
-                                   Cursor="Arrow"
-                                   Maximum="{TemplateBinding ScrollableWidth}"
-                                   Minimum="0"
-                                   Orientation="Horizontal"
-                                   ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <!-- Стили остаются без изменений -->
         <Style x:Key="TableHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
@@ -371,6 +263,113 @@
             <Setter Property="Height" Value="100"/>
             <Setter Property="Margin" Value="0,5,0,10"/>
         </Style>
+        <Style x:Key="CustomScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="MinWidth" Value="8"/>
+            <Setter Property="Opacity" Value="0.3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
+                                <Track.Thumb>
+                                    <Thumb Style="{DynamicResource ScrollBarThumbVertical}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для Thumb (бегунка) -->
+        <Style x:Key="ScrollBarThumbVertical" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border x:Name="rectangle"
+                    Width="8"
+                    Background="#A0A0A0"
+                    CornerRadius="4"
+                    SnapsToDevicePixels="True"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="rectangle" Property="Background" Value="#707070"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="rectangle" Property="Background" Value="#505050"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для ScrollViewer с красивым скроллом -->
+        <Style x:Key="BeautifulScrollViewer" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Rectangle x:Name="Corner" Grid.Row="1" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+
+                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="{TemplateBinding Padding}"
+                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                        CanHorizontallyScroll="False"
+                                        CanVerticallyScroll="False"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+                            <ScrollBar x:Name="PART_VerticalScrollBar"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           AutomationProperties.AutomationId="VerticalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableHeight}"
+                           Minimum="0"
+                           Style="{StaticResource CustomScrollBar}"
+                           ViewportSize="{TemplateBinding ViewportHeight}"
+                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                           Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+                            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           AutomationProperties.AutomationId="HorizontalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableWidth}"
+                           Minimum="0"
+                           Orientation="Horizontal"
+                           ViewportSize="{TemplateBinding ViewportWidth}"
+                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                           Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -458,14 +457,14 @@
                     </Border.Background>
 
                     <StackPanel HorizontalAlignment="Center">
-                        <TextBlock Text="1 Договорная деятельность" 
+                        <TextBlock Text="3 Издательская деятельность" 
                                    FontSize="14" 
                                    FontWeight="Bold" 
                                    Foreground="White"
                                    TextAlignment="Center"
                                    Margin="0,0,0,10"/>
 
-                        <TextBlock Text="1.3 Темы госбюджетных научных исследований" 
+                        <TextBlock Text="3.1 Издательская деятельность сотрудников кафедры и лаборатории" 
                                    FontSize="12" 
                                    FontWeight="Bold" 
                                    Foreground="White"
@@ -497,7 +496,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Шапка таблицы -->
-                            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,0" Background="White">
+                            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"/>
@@ -515,7 +514,7 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="№ п/п" Style="{StaticResource TableHeaderStyle}" 
+                                            <TextBlock Text="№" Style="{StaticResource TableHeaderStyle}" 
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol0" Style="{StaticResource SortButtonStyle}" 
                                                     Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -529,7 +528,7 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Номер в Реестре тем ГБНИ" 
+                                            <TextBlock Text="Доля авторов заполняющей кафедры" 
                                                        Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol1" Style="{StaticResource SortButtonStyle}" 
@@ -544,8 +543,7 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Наименование НИР,&#x0a;Ф.И.О. руководителя" 
-                                                       Style="{StaticResource TableHeaderStyle}" 
+                                            <TextBlock Text="Фамилия И.О. авторов" Style="{StaticResource TableHeaderStyle}" 
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol2" Style="{StaticResource SortButtonStyle}" 
                                                     Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -553,15 +551,30 @@
                                         </Grid>
                                     </Border>
 
-                                    <Border Grid.Column="3" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,1,0">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Сроки выполнения" Style="{StaticResource TableHeaderStyle}" 
+                                            <TextBlock Text="Наименование публикации" Style="{StaticResource TableHeaderStyle}" 
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol3" Style="{StaticResource SortButtonStyle}" 
+                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Тип публикации" 
+                                                       Style="{StaticResource TableHeaderStyle}" 
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Button x:Name="SortCol4" Style="{StaticResource SortButtonStyle}" 
                                                     Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                                     Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
@@ -573,60 +586,34 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Краткая характеристика выполненной работы в 2024 г." 
-                                                       Style="{StaticResource TableHeaderStyle}" 
+                                            <TextBlock Text="Наименование  издания, год, страницы публикации (без кавычек)" 
+                                                       Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
                                                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            <Button x:Name="SortCol4" Style="{StaticResource SortButtonStyle}" 
+                                            <Button x:Name="SortCol5" Style="{StaticResource SortButtonStyle}" 
                                                     Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                                     Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
-
                                     <Border Grid.Column="6">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Text="Кому представлен отчет. Место и характеристика использования НИР" 
-                                                       Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
-                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Место издания (наименование организации, город)" 
+                   Style="{StaticResource TableHeaderStyle}" TextWrapping="Wrap"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             <Button x:Name="SortCol6" Style="{StaticResource SortButtonStyle}" 
-                                                    Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                                    Visibility="Collapsed" Margin="0,0,4,2"/>
+                Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Visibility="Collapsed" Margin="0,0,4,2"/>
                                         </Grid>
                                     </Border>
                                 </Grid>
                             </Border>
 
-                            <!-- Подзаголовки для Сроков выполнения -->
-                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                            
 
-                                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                    <Border Grid.Column="3" BorderBrush="Black" BorderThickness="0,1,1,0">
-                                        <TextBlock Text="начало" Style="{StaticResource TableHeaderStyle}"/>
-                                    </Border>
-                                    <Border Grid.Column="4" BorderBrush="Black" BorderThickness="0,1,1,0">
-                                        <TextBlock Text="окончание" Style="{StaticResource TableHeaderStyle}"/>
-                                    </Border>
-                                    <Border Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,1,0"/>
-                                    <Border Grid.Column="6"/>
-                                </Grid>
-                            </Border>
-
-                            <!-- === ТРЕТЬЯ СТРОКА: Порядковые номера столбцов с границами === -->
+                            <!-- === ТРЕТЬЯ СТРОКА: Порядковые номера столбцов с видимыми границами === -->
                             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,0,1" Background="White">
                                 <Grid>
                                     <Grid.ColumnDefinitions>

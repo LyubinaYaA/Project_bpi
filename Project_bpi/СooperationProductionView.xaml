@@ -201,7 +201,7 @@
                     </Border.Background>
 
                     <StackPanel HorizontalAlignment="Center">
-                        <TextBlock Text="1. Договорная деятельность" 
+                        <TextBlock Text="1 Договорная деятельность" 
                                FontSize="14" 
                                FontWeight="Bold" 
                                Foreground="White"

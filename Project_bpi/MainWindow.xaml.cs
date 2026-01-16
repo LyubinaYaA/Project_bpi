@@ -628,11 +628,11 @@ namespace Project_bpi
             }
             else if (menuItem == Item_31)
             {
-                MainContentControl.Content = new TextBlock { Text = "Издательская деятельность сотрудников кафедры и лаборатории", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item31_View();
             }
             else if (menuItem == Item_32)
             {
-                MainContentControl.Content = new TextBlock { Text = "Публикационная активность профессорско-преподавательского состава кафедры и научных сотрудников лаборатории", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item32_View();
             }
             else if (menuItem == Item_41)
             {
