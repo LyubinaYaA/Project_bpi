@@ -79,6 +79,15 @@
     <Compile Include="Item32_View.xaml.cs">
       <DependentUpon>Item32_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Item41_View.xaml.cs">
+      <DependentUpon>Item41_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item42_View.xaml.cs">
+      <DependentUpon>Item42_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Item43_View.xaml.cs">
+      <DependentUpon>Item43_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item_13View.xaml.cs">
       <DependentUpon>Item_13View.xaml</DependentUpon>
     </Compile>
@@ -129,6 +138,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Item32_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item41_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item42_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item43_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

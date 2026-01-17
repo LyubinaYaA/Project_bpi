@@ -634,17 +634,21 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new Item32_View();
             }
+            else if (menuItem == Section4_Header)
+            {
+                MainContentControl.Content = new TextBlock { Text = "Привести сравнительный анализ плановых показателей, заявленных на 2024 г. с фактическим выполнением.", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+            }
             else if (menuItem == Item_41)
             {
-                MainContentControl.Content = new TextBlock { Text = "Общие сведения", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item41_View();
             }
             else if (menuItem == Item_42)
             {
-                MainContentControl.Content = new TextBlock { Text = "Полученные патенты/положительные решения на изобретения и полезные модели", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item42_View();
             }
             else if (menuItem == Item_43)
             {
-                MainContentControl.Content = new TextBlock { Text = "Полученные свидетельства на программные продукты и базы данных, электронные ресурсы", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item43_View();
             }
             else if (menuItem == Item_51)
             {
