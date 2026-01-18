@@ -660,23 +660,23 @@ namespace Project_bpi
             }
             else if (menuItem == Item_52)
             {
-                MainContentControl.Content = new TextBlock { Text = "Участие в конкурсах, грантах", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item52_View();
             }
             else if (menuItem == Item_53)
             {
-                MainContentControl.Content = new TextBlock { Text = "Научные конференции", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item53_View();
             }
             else if (menuItem == Item_53a)
             {
-                MainContentControl.Content = new TextBlock { Text = "Организованные конференции", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item53a_View();
             }
             else if (menuItem == Item_53b)
             {
-                MainContentControl.Content = new TextBlock { Text = "План проведения конференций, семинаров, совещаний в 2025 г.", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item53b_View();
             }
             else if (menuItem == Item_54)
             {
-                MainContentControl.Content = new TextBlock { Text = "Участие в выставках-ярмарках", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item54_View();
             }
             else if (menuItem == Item_Archive)
             {
