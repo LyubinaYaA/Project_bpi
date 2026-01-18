@@ -652,11 +652,11 @@ namespace Project_bpi
             }
             else if (menuItem == Item_51)
             {
-                MainContentControl.Content = new TextBlock { Text = "Реализуемые стартап-проекты", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item51_View();
             }
             else if (menuItem == Item_51a)
             {
-                MainContentControl.Content = new TextBlock { Text = "Планируемые стартап-проекты", FontSize = 18, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item51a_View();
             }
             else if (menuItem == Item_52)
             {

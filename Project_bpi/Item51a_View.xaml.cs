@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Project_bpi
 {
-    public partial class Item31_View : UserControl
+    public partial class Item51a_View : UserControl
     {
         private bool _sortButtonsVisible = false;
         private int _currentColumnIndex = -1;
@@ -20,7 +20,7 @@ namespace Project_bpi
         private bool _isDeletionMode = false;
         private Brush _defaultDeleteButtonBackground;
 
-        public Item31_View()
+        public Item51a_View()
         {
             InitializeComponent();
 
@@ -41,9 +41,6 @@ namespace Project_bpi
                 FilterSortPanel.Visibility = Visibility.Collapsed;
             };
 
-
-            if (DeleteButton != null)
-                _defaultDeleteButtonBackground = DeleteButton.Background.Clone();
         }
 
         // === СТАРАЯ ЛОГИКА: ФИЛЬТРАЦИЯ И СОРТИРОВКА ===
@@ -57,8 +54,6 @@ namespace Project_bpi
             SortCol2.Visibility = visibility;
             SortCol3.Visibility = visibility;
             SortCol4.Visibility = visibility;
-            SortCol5.Visibility = visibility;
-            SortCol6.Visibility = visibility;
         }
 
         private void SetupSortButtonEvents()
@@ -68,8 +63,6 @@ namespace Project_bpi
             SortCol2.Click += (s, e) => ShowFilterSortPanel(2, SortCol2);
             SortCol3.Click += (s, e) => ShowFilterSortPanel(3, SortCol3);
             SortCol4.Click += (s, e) => ShowFilterSortPanel(4, SortCol4);
-            SortCol5.Click += (s, e) => ShowFilterSortPanel(5, SortCol4);
-            SortCol6.Click += (s, e) => ShowFilterSortPanel(6, SortCol6);
         }
 
         private void ShowFilterSortPanel(int columnIndex, Button sortButton)
@@ -167,6 +160,4 @@ namespace Project_bpi
             }
         }
     }
-
-
 }
