@@ -359,7 +359,6 @@
                                             </Border>
                                         </StackPanel>
                                     </StackPanel>
-                                    <!-- Разделы 2-6 -->
                                     <!-- Раздел 2 -->
                                     <StackPanel>
                                         <Border x:Name="Section2_Header"

@@ -109,6 +109,9 @@
     <Compile Include="Item54_View.xaml.cs">
       <DependentUpon>Item54_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Item6_View.xaml.cs">
+      <DependentUpon>Item6_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item_13View.xaml.cs">
       <DependentUpon>Item_13View.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Item54_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item6_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
