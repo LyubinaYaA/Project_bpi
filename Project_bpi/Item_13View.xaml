@@ -374,6 +374,10 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
         <!-- Окно фильтрации и сортировки -->
         <Border x:Name="FilterSortPanel"
                 Background="#b8b8b8"
@@ -704,10 +708,10 @@
 
         <!-- Кнопка Сохранить -->
         <Button Content="Сохранить" 
-                x:Name="SaveButton"
-                Style="{StaticResource SaveButtonStyle}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0,0,20,20"/>
+        x:Name="SaveButton"
+        Style="{StaticResource SaveButtonStyle}"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        Margin="0,0,20,10" Grid.Row="1" Height="36" Width="102"/>
     </Grid>
 </UserControl>

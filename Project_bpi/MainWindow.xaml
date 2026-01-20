@@ -554,7 +554,7 @@
                                     <Border x:Name="Section7_Header" Tag="sub" MouseLeftButtonDown="Section7_Header_Click" Style="{StaticResource MenuItemStyle}">
                                         <TextBlock Text="Раздел 7" Style="{StaticResource SubMenuStyle}"/>
                                     </Border>
-                                    <Border x:Name="Section8_Header" Tag="sub" MouseLeftButtonDown="Section8_Header_Click" Style="{StaticResource MenuItemStyle}">
+                                    <Border x:Name="Section8_Header" Tag="sub" MouseLeftButtonDown="MenuItem_Click" Style="{StaticResource MenuItemStyle}">
                                         <TextBlock Text="Раздел 8" Style="{StaticResource SubMenuStyle}"/>
                                     </Border>
                                     <Border x:Name="Section9_Header" Tag="sub" MouseLeftButtonDown="Section9_Header_Click" Style="{StaticResource MenuItemStyle}">

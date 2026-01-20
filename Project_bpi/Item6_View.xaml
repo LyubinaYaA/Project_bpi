@@ -374,9 +374,13 @@
     </UserControl.Resources>
 
     <Grid>
-         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Style="{StaticResource BeautifulScrollViewer}" HorizontalScrollBarVisibility="Disabled">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Style="{StaticResource BeautifulScrollViewer}" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,0">
             <StackPanel Margin="20">
                 <Border CornerRadius="35" 
                         Margin="10" 
@@ -578,7 +582,7 @@
                         </Grid>
                     </Border>
 
-                    
+
                 </Grid>
 
                 <!-- Кнопки управления -->
@@ -592,10 +596,10 @@
 
         <!-- Кнопка Сохранить -->
         <Button Content="Сохранить" 
-                x:Name="SaveButton"
-                Style="{StaticResource SaveButtonStyle}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0,0,20,20"/>
+        x:Name="SaveButton"
+        Style="{StaticResource SaveButtonStyle}"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        Margin="0,0,20,10" Grid.Row="1" Height="36" Width="102"/>
     </Grid>
 </UserControl>

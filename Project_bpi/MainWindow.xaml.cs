@@ -682,6 +682,10 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new Item6_View();
             }
+            else if (menuItem == Section8_Header)
+            {
+                MainContentControl.Content = new Item8_View();
+            }
             else if (menuItem == Item_Archive)
             {
                 MainContentControl.Content = new ArchivePage();
