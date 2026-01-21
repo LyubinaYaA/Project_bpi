@@ -78,6 +78,16 @@ namespace Project_bpi
             // 3-й уровень → Подразделы внутри "Научные конференции"
             parents[Item_53a] = Item_53;
             parents[Item_53b] = Item_53;
+            // Учебный отчет → корень
+            parents[Study_Header] = null;
+
+            // Раздел 14 → внутри Учебного отчета
+            parents[Section14_Header] = Study_Header;
+
+            // Подразделы 14.x
+            parents[Item_141] = Section14_Header;
+            parents[Item_142] = Section14_Header;
+            parents[Item_143] = Section14_Header;
         }
 
         public class CalendarDay
@@ -471,7 +481,22 @@ namespace Project_bpi
         private void Section7_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Section8_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Section9_Header_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Study_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Study_Menu, Study_Arrow);
+            MenuItem_Click(sender, e);
+        }
 
+        private void Section14_Header_Click(object sender, MouseButtonEventArgs e)
+        {
+            ToggleSectionMenu(Section14_Menu, Study_Arrow14);
+            MenuItem_Click(sender, e);
+        }
+
+        // Обработчики подразделов
+        private void Item_141_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_142_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
+        private void Item_143_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void ToggleSectionMenu(StackPanel menu, Image arrow)
         {
             if (menu.Visibility == Visibility.Visible)
@@ -682,6 +707,10 @@ namespace Project_bpi
             {
                 MainContentControl.Content = new Item6_View();
             }
+            else if (menuItem == Section7_Header)
+            {
+                MainContentControl.Content = new Item7_View();
+            }
             else if (menuItem == Section8_Header)
             {
                 MainContentControl.Content = new Item8_View();
@@ -693,6 +722,18 @@ namespace Project_bpi
             else if (menuItem == Item_Templates)
             {
                 MainContentControl.Content = new TemplatesPage();
+            }
+            else if (menuItem == Item_141)
+            {
+                MainContentControl.Content = new Item141_View();
+            }
+            else if (menuItem == Item_142)
+            {
+                MainContentControl.Content = new Item142_View();
+            }
+            else if (menuItem == Item_143)
+            {
+                MainContentControl.Content = new Item143_View();
             }
             else if (menuItem == Section7_Header || menuItem == Section8_Header || menuItem == Section9_Header)
             {
@@ -775,6 +816,8 @@ namespace Project_bpi
             NIR_Arrow5.Visibility = IsActive(Section5_Header) ? Visibility.Collapsed : Visibility.Visible;
             NIR_Arrow51.Visibility = IsActive(Item_51) ? Visibility.Collapsed : Visibility.Visible;
             NIR_Arrow53.Visibility = IsActive(Item_53) ? Visibility.Collapsed : Visibility.Visible;
+            Study_Arrow.Visibility = IsActive(Study_Header) ? Visibility.Collapsed : Visibility.Visible;
+            Study_Arrow14.Visibility = IsActive(Section14_Header) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -783,7 +826,7 @@ namespace Project_bpi
             string query = SearchBox.Text.ToLower();
 
             FilterMenuPanel(NIR_Menu, query);
-            FilterMenuItem(Item_Study, query);
+            FilterMenuPanel(Study_Menu, query);
             FilterMenuItem(Item_Archive, query);
             FilterMenuItem(Item_Templates, query);
         }
@@ -805,6 +848,8 @@ namespace Project_bpi
                     else if (border.Name == "Item_51") subPanel = Item_51_SubMenu;
                     else if (border.Name == "Item_53") subPanel = Item_53_SubMenu;
                     else if (border.Name == "NIR_Header") subPanel = NIR_Menu;
+                    else if (border.Name == "Section14_Header") subPanel = Section14_Menu;
+                    else if (border.Name == "Study_Header") subPanel = Study_Menu;
 
                     if (subPanel != null)
                     {

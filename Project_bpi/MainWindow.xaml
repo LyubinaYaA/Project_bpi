@@ -563,9 +563,54 @@
                                 </StackPanel>
                             </StackPanel>
                             <!-- Остальные пункты меню -->
-                            <Border x:Name="Item_Study" MouseLeftButtonDown="MenuItem_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
-                                <TextBlock Text="Учебный отчет" Style="{StaticResource MenuHeaderStyle}"/>
-                            </Border>
+                            <!-- Учебный отчет -->
+                            <StackPanel>
+                                <Border x:Name="Study_Header"
+            Tag="main"
+            MouseLeftButtonDown="Study_Header_Click"
+            Style="{StaticResource MenuItemStyle}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Учебный отчет" Style="{StaticResource MenuHeaderStyle}"/>
+                                        <Image x:Name="Study_Arrow" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <StackPanel x:Name="Study_Menu" Visibility="Collapsed">
+                                    <!-- Раздел 14 -->
+                                    <StackPanel>
+                                        <Border x:Name="Section14_Header"
+                    Tag="sub"
+                    MouseLeftButtonDown="Section14_Header_Click"
+                    Style="{StaticResource MenuItemStyle}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Раздел 14" Style="{StaticResource SubMenuStyle}"/>
+                                                <Image x:Name="Study_Arrow14" Source="/images/arrow.jpg" Width="12" Height="12" Margin="6,2,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <StackPanel x:Name="Section14_Menu" Visibility="Collapsed">
+                                            <Border x:Name="Item_141" MouseLeftButtonDown="Item_141_Click"
+                        Tag="sub2"
+                        Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Научно-издательская деятельность (факт)"
+                               Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_142" MouseLeftButtonDown="Item_142_Click"
+                        Tag="sub2"
+                        Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Подача заявок на объекты интеллектуальной собственности (факт)"
+                               Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                            <Border x:Name="Item_143" MouseLeftButtonDown="Item_143_Click"
+                        Tag="sub2"
+                        Style="{StaticResource MenuItemStyle}">
+                                                <TextBlock Text="Проведения конференций, семинаров, совещаний (факт)"
+                               Style="{StaticResource SubMenuStyle1}" TextWrapping="Wrap"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
                             <Border x:Name="Item_Archive" MouseLeftButtonDown="Item_Archive_Click" Tag="main" Style="{StaticResource MenuItemStyle}">
                                 <TextBlock Text="Архив" Style="{StaticResource MenuHeaderStyle}"/>
                             </Border>
