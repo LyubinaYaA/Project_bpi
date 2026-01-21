@@ -785,7 +785,10 @@ namespace Project_bpi
         private void Item_14_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Item_15_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
         private void Item_Archive_Click(object sender, MouseButtonEventArgs e) => MenuItem_Click(sender, e);
-
+        private void HistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentControl.Content = new HistoryChangesView();
+        }
         private void HighlightChain(Border start)
         {
             Border current = start;

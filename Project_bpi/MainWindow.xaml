@@ -853,26 +853,45 @@
                 <StackPanel Grid.Row="1" Margin="10">
                     <!-- Кнопка "История изменений" -->
                     <Button Height="40"
-            Background="White"
-            Foreground="#0167a4"
-            BorderBrush="#d6e2ea"
-            BorderThickness="1"
-            FontWeight="SemiBold"
-            Padding="10,2">
+        Background="White"
+        Foreground="#0167a4"
+        BorderBrush="#d6e2ea"
+        BorderThickness="1"
+        FontWeight="SemiBold"
+        Padding="10,2"
+        Click="HistoryButton_Click"
+        IsEnabled="True">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="15"
-                        Padding="{TemplateBinding Padding}">
+                                <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="15"
+                    Padding="{TemplateBinding Padding}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Эффект при наведении -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#f0f8ff"/>
+                                        <Setter Property="Foreground" Value="#004c8c"/>
+                                    </Trigger>
+                                    <!-- Эффект при нажатии -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#e6f2ff"/>
+                                        <Setter Property="Foreground" Value="#003d73"/>
+                                    </Trigger>
+                                    <!-- Состояние отключённой кнопки -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                         <TextBlock Text="История&#x0a;изменений" 
-                   TextAlignment="Center" 
-                   TextWrapping="Wrap"/>
+               TextAlignment="Center" 
+               TextWrapping="Wrap"/>
                     </Button>
                     <!-- Кнопка "Сформировать итоговый отчет" -->
                     <Button Height="45"
