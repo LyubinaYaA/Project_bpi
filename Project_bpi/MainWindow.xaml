@@ -714,9 +714,9 @@
                 <!-- Справка - в самом низу -->
                 <StackPanel Grid.Row="1" Margin="0,10,0,10">
                     <Rectangle Height="1" Fill="#d6e2ea" Margin="10,0,10,10"/>
-                    <Border Style="{StaticResource MenuItemStyle}">
-                        <TextBlock Text="Справка" Style="{StaticResource MenuHeaderStyle}"/>
-                    </Border>
+                    <TextBlock Width="224" Height="18"><Hyperlink Click="HelpHyperlink_Click" 
+                   Foreground="#0167a4"
+                   TextDecorations="{x:Null}"><Run Text="Справка"/></Hyperlink></TextBlock>
                 </StackPanel>
             </Grid>
         </Border>

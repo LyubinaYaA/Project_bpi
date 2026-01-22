@@ -789,6 +789,10 @@ namespace Project_bpi
         {
             MainContentControl.Content = new HistoryChangesView();
         }
+        private void HelpHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentControl.Content = new Spravka_View();
+        }
         private void HighlightChain(Border start)
         {
             Border current = start;

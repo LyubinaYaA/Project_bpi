@@ -139,6 +139,9 @@
       <DependentUpon>Item_14View.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaxHeightConverter.cs" />
+    <Compile Include="Spravka_View.xaml.cs">
+      <DependentUpon>Spravka_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TemplatesPage.xaml.cs">
       <DependentUpon>TemplatesPage.xaml</DependentUpon>
     </Compile>
@@ -279,6 +282,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Spravka_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TemplatesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
