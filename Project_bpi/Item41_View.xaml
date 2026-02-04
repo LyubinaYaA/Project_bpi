@@ -505,9 +505,7 @@
 
                 <!-- Кнопки управления -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-                    <Button Content="Создать" x:Name="CreateButton" Style="{StaticResource ActionButtonStyle}"/>
                     <Button Content="Редактировать" x:Name="EditButton" Style="{StaticResource ActionButtonStyle}"/>
-                    <Button Content="Удалить" x:Name="DeleteButton" Style="{StaticResource ActionButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

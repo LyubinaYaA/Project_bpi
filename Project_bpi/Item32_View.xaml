@@ -672,17 +672,7 @@
                         </Grid>
                     </Border>
 
-                    <Button x:Name="FilterButton"
-                            Grid.Column="1" 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Top"
-                            Background="{x:Null}" 
-                            BorderBrush="{x:Null}" 
-                            Margin="10,0,0,0" 
-                            Width="25" 
-                            Height="25">
-                        <Image Source="/Снимок экрана 2025-11-17 121115.png" Stretch="Fill"/>
-                    </Button>
+                    
                 </Grid>
 
                 <!-- Кнопки управления -->
