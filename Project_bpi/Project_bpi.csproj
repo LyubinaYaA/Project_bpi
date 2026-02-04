@@ -102,6 +102,9 @@
     <Compile Include="Item43_View.xaml.cs">
       <DependentUpon>Item43_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Item4_View.xaml.cs">
+      <DependentUpon>Item4_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item51a_View.xaml.cs">
       <DependentUpon>Item51a_View.xaml</DependentUpon>
     </Compile>
@@ -213,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Item43_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Item4_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

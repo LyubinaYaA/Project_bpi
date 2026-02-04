@@ -661,7 +661,7 @@ namespace Project_bpi
             }
             else if (menuItem == Section4_Header)
             {
-                MainContentControl.Content = new TextBlock { Text = "Привести сравнительный анализ плановых показателей, заявленных на 2024 г. с фактическим выполнением.", FontSize = 18, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(20) };
+                MainContentControl.Content = new Item4_View();
             }
             else if (menuItem == Item_41)
             {
